@@ -1,0 +1,10 @@
+.navbar {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.menuIcon {
+  display: none;
+}

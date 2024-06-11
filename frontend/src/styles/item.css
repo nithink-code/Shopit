@@ -1,0 +1,8 @@
+.itemButtons {
+  width: 20rem;
+  height: 6rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}

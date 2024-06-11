@@ -1,0 +1,17 @@
+.toastBody {
+  font-family: "Atlas Grotesk Web", Arial, Helvetica, sans-serif;
+  color: #10171d; /* #10171D */
+  font-size: 0.875rem !important;
+}
+
+@media (max-width: 600px) and (min-width: 0px) {
+  .auth {
+    position: sticky;
+    left: 0%;
+    top: 25%;
+    bottom: 25%;
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: center;
+  }
+}
