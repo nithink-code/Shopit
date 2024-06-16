@@ -1,0 +1,24 @@
+.orderBtns {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+.orderImageBtn {
+  margin: 2rem;
+  height: 15rem;
+  width: 15rem;
+}
+.orderDetailTable {
+  width: 50% !important;
+}
+
+@media (min-width: 0px) and (max-width: 800px) {
+  .orderDetailTable {
+    width: 100% !important;
+    height: 60% !important;
+  }
+}

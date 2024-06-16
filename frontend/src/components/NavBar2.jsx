@@ -25,7 +25,13 @@ export default function NavBar2({
 }) {
   let navigate = useNavigate();
 
+  let displayElements = (value) => {
+    setShowComponent(value);
+  };
+
   let logout = async () => {
+    displayElements(false);
+
     await axios
       .get("/api/logOut")
       .then((res) => {
@@ -34,6 +40,7 @@ export default function NavBar2({
           toast.success("Successfully Logged Out");
           if (window.location.pathname === "/") {
             homePageLogOut();
+            displayElements(true);
           } else {
             navigate("/");
           }
@@ -53,7 +60,7 @@ export default function NavBar2({
       ? customerRole
         ? (pages = [
             {
-              name: "Explore",
+              name: "Explore Products",
               navigate: () => navigate("/"),
             },
           ])
@@ -65,7 +72,7 @@ export default function NavBar2({
           ])
       : (pages = [
           {
-            name: "Explore",
+            name: "Explore Products",
             navigate: () => navigate("/"),
           },
           {

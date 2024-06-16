@@ -7,6 +7,7 @@ import { Form } from "react-router-dom";
 import LoadButtton from "./LoadButton";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme.js";
+import Stock from "./Stock.jsx";
 
 export default function ItemInfo({
   item,
@@ -16,16 +17,22 @@ export default function ItemInfo({
   retailer,
   deleteItemOperation,
   loading,
+  handleDialogClickOpen,
+  handleOpen,
 }) {
   return (
     <Paper
       elevation={8}
-      style={{ borderRadius: "2rem", marginTop: "2rem" }}
+      style={{ borderRadius: "2rem", marginTop: "2rem", width: "100%" }}
       className="paper"
     >
-      <div className="itemImage">
-        <img src={item.image} alt={item.name} />
+      <div className="imageSection">
+        <div className="itemImage">
+          <img src={item.image} alt={item.name} />
+        </div>
+        <Stock stock={item.stock} />
       </div>
+
       <div className="itemContent">
         <div className="itemData">
           <Typography
@@ -85,11 +92,20 @@ export default function ItemInfo({
                 variant="contained"
                 color="success"
                 style={{ marginLeft: "2rem" }}
+                onClick={() => handleDialogClickOpen()}
               >
                 Buy Now
               </Button>
             ) : (
               <>
+                <Button
+                  variant="success"
+                  size="medium"
+                  onClick={handleOpen}
+                  style={{ marginLeft: "2rem" }}
+                >
+                  View Sales Stats
+                </Button>
                 <Form
                   method="GET"
                   action={`/retailer/products/${item._id}/edit`}

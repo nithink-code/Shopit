@@ -28,6 +28,14 @@ let itemSchema = new Schema({
     type: Number,
     default: 0,
   },
+  profit: {
+    type: Number,
+    default: 0,
+  },
+  stock: {
+    type: Number,
+    default: 1,
+  },
 });
 
 let Item = mongoose.model("Item", itemSchema);

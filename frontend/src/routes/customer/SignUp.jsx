@@ -78,7 +78,7 @@ export default function SignUp() {
   return (
     <div className="auth">
       <ThemeProvider theme={theme}>
-        <NavBar2 login={false} />
+        <NavBar2 login={false} setShowComponent={setShowComponent} />
         <h1>
           SignUp as{" "}
           {apiRoute === "items/signUp" ? (

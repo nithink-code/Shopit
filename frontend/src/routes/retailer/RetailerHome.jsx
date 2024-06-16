@@ -33,8 +33,11 @@ export default function RetailerHome() {
     <>
       {showComponent ? (
         <>
-          {/* <Navbar login={navLogin} customerRole={roleIsCustomer} /> */}
-          <NavBar2 login={navLogin} customerRole={roleIsCustomer} />
+          <NavBar2
+            login={navLogin}
+            customerRole={roleIsCustomer}
+            setShowComponent={setShowComponent}
+          />
           <h1>Retailer HomePage</h1>
           <div className="itemsList">
             {products.map((product) => {

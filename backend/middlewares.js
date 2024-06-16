@@ -3,6 +3,7 @@ const {
   itemSchema2,
   signUpFormValidation,
   loginFormValidation,
+  orederSchema,
 } = require("./schemaValidation.js");
 const expressError = require("./utils/expressError.js");
 const Item = require("./models/Item.js");
@@ -54,6 +55,16 @@ module.exports.validateItemSchema2 = (req, res, next) => {
 
       next();
     }
+  }
+};
+
+module.exports.validateOrderSchema = (req, res, next) => {
+  let { error } = orederSchema.validate(req.body);
+  if (error) {
+    let errorMsg = error.details.map((el) => el.message).join(",");
+    throw new expressError(422, errorMsg);
+  } else {
+    next();
   }
 };
 
@@ -164,5 +175,15 @@ module.exports.loginFormIsLoggedIn = (req, res, next) => {
     return res.json("notLogIn");
   } else {
     return next();
+  }
+};
+
+module.exports.checkUserRoleLogin = (req, res, next) => {
+  if (!req.user) {
+    res.json("notLogin");
+  } else if (req.user && req.user.role != "customer") {
+    res.json("RoleIsRetailer");
+  } else {
+    next();
   }
 };

@@ -15,6 +15,7 @@ const itemsRouter = require("./routes/items.js");
 const usersRouter = require("./routes/users.js");
 const cartRouter = require("./routes/cart.js");
 const retailerRouter = require("./routes/retailer.js");
+const orderRouter = require("./routes/order.js");
 const { findUserRole, loginFormIsLoggedIn } = require("./middlewares.js");
 const wrapAsync = require("./utils/wrapAsync.js");
 
@@ -98,6 +99,7 @@ app.use("/api/items", itemsRouter); //items route
 app.use("/", usersRouter); //auth and authori route
 app.use("/api/items/cart", cartRouter); //cart route
 app.use("/api/retailer", retailerRouter); //retailer route
+app.use("/api/order/item", orderRouter); //order route
 
 app.use((err, req, res, next) => {
   if (err) {

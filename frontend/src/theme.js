@@ -27,7 +27,8 @@ const theme = createTheme({
         root: {
           "&:focus": {
             outline: "none",
-            boxShadow: "none",
+            // border: "none",
+            // boxShadow: "none",
           },
         },
       },

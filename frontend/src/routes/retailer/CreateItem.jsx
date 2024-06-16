@@ -22,6 +22,7 @@ export default function CreateItem() {
     price: "",
     image: undefined,
     description: "",
+    stock: 1,
   });
 
   let [errors, setErrors] = useState({
@@ -29,6 +30,7 @@ export default function CreateItem() {
     price: { errMsg: "", valid: false },
     image: { errMsg: "", valid: false },
     description: { errMsg: "", valid: false },
+    stock: { errMsg: "", valid: false },
   });
 
   let setForm = (event) => {
@@ -76,12 +78,11 @@ export default function CreateItem() {
     <>
       {showComponent ? (
         <div className="createItem">
-          {/* <Navbar
-            style={{ marginBottom: "0rem" }}
+          <NavBar2
             login={navLogin}
             customerRole={roleIsCustomer}
-          /> */}
-          <NavBar2 login={navLogin} customerRole={roleIsCustomer} />
+            setShowComponent={setShowComponent}
+          />
           <div
             className="createItem-form"
             style={{ transform: "translateY(-2rem)" }}

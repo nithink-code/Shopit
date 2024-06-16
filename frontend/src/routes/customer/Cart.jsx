@@ -54,9 +54,12 @@ export default function Cart() {
       {showComponent ? (
         <>
           <ThemeProvider theme={theme}>
+            <NavBar2
+              login={navLogin}
+              customerRole={roleIsCustomer}
+              setShowComponent={setShowComponent}
+            />
             <h1>Your Cart</h1>
-            {/* <Navbar login={navLogin} customerRole={roleIsCustomer} /> */}
-            <NavBar2 login={navLogin} customerRole={roleIsCustomer} />
             <div className="itemsList">
               {cartData.map((cartItem) => {
                 return (

@@ -36,6 +36,7 @@ export default function Forms({
     data.append("price", item.price);
     data.append("description", item.description);
     data.append("image", item.image);
+    data.append("stock", item.stock);
     if (!err) {
       setLoading(true);
       await axios[requestType](`/api/${apiRoute}`, data, {
@@ -59,6 +60,7 @@ export default function Forms({
         .catch((err) => {
           setLoading(false);
           console.log(err);
+          toast.error(err.response.data);
         });
     }
   };
@@ -122,6 +124,16 @@ export default function Forms({
           errors={errors.image}
           setFormData2={setFormData}
           typeValue="file"
+        />
+
+        <TextInput
+          labelTagText="Quantity: "
+          labelText="Enter product quantity available"
+          nameText="stock"
+          item={item.stock}
+          errors={errors.stock}
+          setFormData2={setFormData}
+          typeValue="number"
         />
 
         <ThemeProvider theme={theme}>

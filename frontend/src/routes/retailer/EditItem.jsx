@@ -29,6 +29,7 @@ export default function EditItem() {
     price: itemInfo.price,
     image: itemInfo.image,
     description: itemInfo.description,
+    stock: itemInfo.stock,
   });
 
   let [errors, setErrors] = useState({
@@ -36,6 +37,7 @@ export default function EditItem() {
     price: { errMsg: "", valid: false },
     image: { errMsg: "", valid: false },
     description: { errMsg: "", valid: false },
+    stock: { errMsg: "", valid: false },
   });
 
   let setForm = (event) => {
@@ -90,12 +92,11 @@ export default function EditItem() {
     <>
       {showComponent ? (
         <div className="createItem">
-          {/* <Navbar
-            style={{ marginBottom: "0rem" }}
+          <NavBar2
             login={navLogin}
             customerRole={roleIsCustomer}
-          /> */}
-          <NavBar2 login={navLogin} customerRole={roleIsCustomer} />
+            setShowComponent={setShowComponent}
+          />
           <Forms
             requestType={"put"}
             apiRoute={`items/${itemInfo._id}`}

@@ -13,6 +13,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin-top: 4rem;
 }
 
 .form-elements {
@@ -20,7 +21,7 @@
   text-align: center;
 }
 
-@media (max-width: 600px) and (min-width: 0px) {
+@media (max-width: 800px) and (min-width: 0px) {
   .form {
     position: sticky;
     left: 0%;

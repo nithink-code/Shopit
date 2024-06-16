@@ -20,7 +20,6 @@ export default function LoginForm({
 }) {
   return (
     <div className="form">
-      {/* <Navbar login={false} customerRole={true} loginPage={true} /> */}
       <h2>Login</h2>
       <Form
         onSubmit={(event) => {

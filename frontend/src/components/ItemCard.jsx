@@ -10,8 +10,20 @@ export default function ItemCrad({ item }) {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Card style={{ width: "250px", height: "fit-content" }} elevation={4}>
-          <CardActionArea>
+        <Card
+          style={{
+            width: "250px",
+            height: "fit-content",
+          }}
+          elevation={4}
+        >
+          <CardActionArea
+            sx={{
+              "&:focus": {
+                outline: "none",
+              },
+            }}
+          >
             <CardMedia
               component="img"
               image={item.image}

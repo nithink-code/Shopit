@@ -71,7 +71,7 @@ export default function Login() {
   return (
     <div className={"auth"} style={{}}>
       <ThemeProvider theme={theme}>
-        <NavBar2 login={false} />
+        <NavBar2 login={false} setShowComponent={setShowComponent} />
         <h1 style={{ width: "100%", wordWrap: "break-word" }}>
           Login as{" "}
           {apiRoute === "items/login" ? (

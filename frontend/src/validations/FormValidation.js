@@ -1,5 +1,6 @@
 let validateForm = (item, newErrors) => {
   let err = false;
+  console.log(item);
   if (item.name === "") {
     newErrors.name.errMsg = "Name is required";
     newErrors.name.valid = true;
@@ -19,6 +20,11 @@ let validateForm = (item, newErrors) => {
   if (item.description === "") {
     newErrors.description.errMsg = "Enter a valid descrption";
     newErrors.description.valid = true;
+    err = true;
+  }
+  if (item.stock === "0" || item.stock === "") {
+    newErrors.stock.errMsg = "Inventory is empty";
+    newErrors.stock.valid = true;
     err = true;
   }
 

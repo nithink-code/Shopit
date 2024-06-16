@@ -11,6 +11,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { checkLogin, deleteItem } from "../../utils/retailers/RetailerItem";
 import ItemInfo from "../../components/ItemInfo";
 import NavBar2 from "../../components/NavBar2";
+import StatsDialog from "../../components/StatsDialog";
 
 export async function loader({ params }) {
   let itemData = await axios.get(`/api/items/${params.productId}`);
@@ -25,6 +26,15 @@ export default function RetailerItem() {
   let [navLogin, setNavLogin] = useState(false);
   let [loading, setLoading] = useState(false);
   let [roleIsCustomer, setRoleIsCustomer] = useState(false);
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     checkLogin(axios, navigate, toast, itemInfo, setNavLogin, setShowComponent);
@@ -41,20 +51,25 @@ export default function RetailerItem() {
         <>
           {itemInfo ? (
             <div className="itemInfo ">
-              {/* <Navbar
-                style={{ marginBottom: "0rem" }}
+              <NavBar2
                 login={navLogin}
                 customerRole={roleIsCustomer}
-              /> */}
-              <NavBar2 login={navLogin} customerRole={roleIsCustomer} />
+                setShowComponent={setShowComponent}
+              />
               <div className="item">
                 <ItemInfo
                   item={itemInfo}
                   retailer={true}
                   deleteItemOperation={deleteItemOperation}
                   loading={loading}
+                  handleOpen={handleClickOpen}
                 />
               </div>
+              <StatsDialog
+                open={open}
+                handleClose={handleClose}
+                item={itemInfo}
+              />
             </div>
           ) : null}
         </>

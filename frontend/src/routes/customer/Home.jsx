@@ -45,28 +45,22 @@ export default function Home() {
     <>
       {showComponent ? (
         <div className="homepage">
-          {/* <Navbar
-            style={{ marginBottom: "2rem" }}
-            login={navLogin}
-            customerRole={roleIsCustomer}
-            roleNotLogin={notLogIn}
-            homePageLogOut={navLogOutConfig}
-          /> */}
           <NavBar2
             login={navLogin}
-            // setLogin={setNavLogin}
             customerRole={roleIsCustomer}
             homePageLogOut={navLogOutConfig}
             setShowComponent={setShowComponent}
           />
           <div className="itemsList">
-            {items.map((singleItem) => (
-              <a href={`/item/${singleItem._id}`} key={singleItem._id}>
-                <div className="items">
-                  <ItemCrad item={singleItem} cardDetails={cardDetails} />
-                </div>
-              </a>
-            ))}
+            {items.map((singleItem) =>
+              singleItem.stock !== 0 ? (
+                <a href={`/item/${singleItem._id}`} key={singleItem._id}>
+                  <div className="items">
+                    <ItemCrad item={singleItem} cardDetails={cardDetails} />
+                  </div>
+                </a>
+              ) : null
+            )}
           </div>
         </div>
       ) : (

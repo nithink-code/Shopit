@@ -4,7 +4,7 @@
   font-size: 0.875rem !important;
 }
 
-@media (max-width: 600px) and (min-width: 0px) {
+@media (max-width: 800px) and (min-width: 0px) {
   .auth {
     position: sticky;
     left: 0%;
