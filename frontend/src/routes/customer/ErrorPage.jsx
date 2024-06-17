@@ -1,10 +1,10 @@
 import { useRouteError } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import { useEffect, useState } from "react";
-import Navbar from "../../components/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import NavBar2 from "../../components/NavBar2";
+import { toast } from "react-toastify";
 
 export default function ErrorPage() {
   let navigate = useNavigate();
@@ -34,11 +34,6 @@ export default function ErrorPage() {
 
   return (
     <div className="errorPage">
-      {/* <Navbar
-        style={{ marginBottom: "0rem" }}
-        loginStatus={navLoginStatus}
-        navLoginCheckRoute={"/api/navbar/isLoggedIn"}
-      /> */}
       <NavBar2 login={navLoginStatus} />
       <Alert severity="error">
         {" "}

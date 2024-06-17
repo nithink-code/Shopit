@@ -38,7 +38,6 @@ let preventFormDefaultFunction = async (
     if (!err) {
       loadBtn(setLoading, true);
       let authData = await axios.post(`/api/${route}`, signUpData);
-      // displayElements(setShowComponent, false);
       if (authData.data.signUpStatus === "success signUp") {
         toast.success("Account Created Successfully");
         navigate(`${authData.data.redirect}`);
@@ -47,7 +46,6 @@ let preventFormDefaultFunction = async (
         navigate(authData.data.redirect);
       } else if (authData.data === "signUpError") {
         loadBtn(setLoading, false);
-        // displayElements(setShowComponent, true);
         toast.error("Username  already exists");
       }
     }

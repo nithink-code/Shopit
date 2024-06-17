@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Forms from "../../components/Forms";
-import Navbar from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { toast } from "react-toastify";

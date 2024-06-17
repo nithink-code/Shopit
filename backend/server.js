@@ -87,13 +87,9 @@ app.get("/api/getUserRole", findUserRole, (req, res) => {
   res.json({ role: undefined });
 });
 
-app.get(
-  "/api/loginForm/isLoggedIn",
-  loginFormIsLoggedIn,
-  wrapAsync((req, res) => {
-    res.json("LoggedIn");
-  })
-);
+app.get("/api/loginForm/isLoggedIn", loginFormIsLoggedIn, (req, res) => {
+  res.json("LoggedIn");
+});
 
 app.use("/api/items", itemsRouter); //items route
 app.use("/", usersRouter); //auth and authori route

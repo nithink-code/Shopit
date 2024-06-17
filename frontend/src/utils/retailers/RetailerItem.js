@@ -7,36 +7,31 @@ let checkLogin = async (
   setShowComponent
 ) => {
   try {
-    let status = await axios.post("/api/isLoggedIn", {
-      route: window.location.pathname,
-    });
-    if (status.data === "notLogIn") {
+    let status = await axios.get("/api/retailer/roleAndLogin");
+    if (status.data === "notLogin") {
       toast.warn("You must be Logged in");
       navigate("/login");
+    } else if (status.data === "RoleIsCustomer") {
+      toast.error("Access denied");
+      navigate("/");
     } else {
-      let userData = await axios.get("/api/getUserRole");
-      if (userData.data.role === "retailer") {
-        if (itemInfo === null || itemInfo === "itemNotFound") {
-          toast.warn("Product does not exist");
-          navigate("/retailer");
-        } else {
-          checkOwnership(
-            axios,
-            navigate,
-            toast,
-            itemInfo,
-            setNavLogin,
-            setShowComponent
-          );
-        }
+      if (itemInfo === null || itemInfo === "itemNotFound") {
+        toast.warn("Product does not exist");
+        navigate("/retailer");
       } else {
-        toast.warn("Access denied");
-        navigate("/");
+        checkOwnership(
+          axios,
+          navigate,
+          toast,
+          itemInfo,
+          setNavLogin,
+          setShowComponent
+        );
       }
     }
   } catch (err) {
     console.log(err);
-    toast.warn("some error occured");
+    toast.error("some error occured");
     navigate("/");
   }
 };
@@ -59,7 +54,7 @@ let checkOwnership = async (
     }
   } catch (err) {
     console.log(err);
-    toast.warn("some error occured");
+    toast.error("some error occured");
     navigate("/");
   }
 };
@@ -72,19 +67,10 @@ let displayElements = (setNavLogin, setShowComponent) => {
 let deleteItem = async (axios, navigate, toast, id, setLoading) => {
   try {
     load(setLoading, true);
-    let status = await axios.post("/api/isLoggedIn", {
-      route: window.location.pathname,
-    });
-    let res = status.data;
-    if (res === "notLogIn") {
-      toast.warn("You must be Logged in");
-      navigate("/login");
-    } else if (res == "LoggedIn") {
-      deleteOperation(axios, navigate, toast, id);
-    }
+    deleteOperation(axios, navigate, toast, id);
   } catch (err) {
     console.log(err);
-    toast.warn("some error occured");
+    toast.error("some error occured");
     navigate("/");
   }
 };
@@ -92,7 +78,10 @@ let deleteItem = async (axios, navigate, toast, id, setLoading) => {
 let deleteOperation = async (axios, navigate, toast, id) => {
   try {
     let dataInfo = await axios.delete(`/api/items/${id}`);
-    if (dataInfo.data === "notOwner") {
+    if (dataInfo.data === "notLogin") {
+      toast.warn("You must be Logged in");
+      navigate("/login");
+    } else if (dataInfo.data === "notOwner") {
       toast.warn("You are not the owner of this product");
       navigate(`/retailer`);
     } else {
@@ -101,7 +90,7 @@ let deleteOperation = async (axios, navigate, toast, id) => {
     }
   } catch (err) {
     console.log(err);
-    toast.warn("some error occured");
+    toast.error("some error occured");
     navigate("/");
   }
 };

@@ -17,9 +17,20 @@ export default function OrderDetailsTable({ order, handleClose }) {
     return { desc, value };
   }
 
+  //to format the date
+  function formatDate(mongoDate) {
+    const date = new Date(mongoDate);
+
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  }
+
   const rows = [
     createRow("Order Id :", order?._id),
-    createRow("Ordered On :", order?.date),
+    createRow("Ordered On :", formatDate(order?.date)),
     createRow("Product :", order?.productDetail?.name),
     createRow("Product Image :", order?.productDetail?.image),
     createRow("Quantity :", order?.quantity.toLocaleString("en-IN")),

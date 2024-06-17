@@ -25,6 +25,7 @@ export default function TextInput({
           typeValue === "password" ||
           nameText === "username" ||
           nameText === "email" ||
+          nameText === "name" ||
           typeValue === "file"
             ? false
             : true

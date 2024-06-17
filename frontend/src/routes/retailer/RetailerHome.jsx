@@ -1,5 +1,4 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
-import Navbar from "../../components/Navbar";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -38,7 +37,7 @@ export default function RetailerHome() {
             customerRole={roleIsCustomer}
             setShowComponent={setShowComponent}
           />
-          <h1>Retailer HomePage</h1>
+          <h1 style={{ marginTop: "1rem" }}>Your Products</h1>
           <div className="itemsList">
             {products.map((product) => {
               return (

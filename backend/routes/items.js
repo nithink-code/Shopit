@@ -6,6 +6,7 @@ const {
   isLoggedin,
   isOwner,
   UserRole,
+  checkUserRoleLoginForRetailer,
 } = require("../middlewares.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const itemsController = require("../controllers/items.js");
@@ -50,7 +51,7 @@ router.put(
 //delete route
 router.delete(
   "/:id",
-  isLoggedin,
+  checkUserRoleLoginForRetailer,
   isOwner,
   wrapAsync(itemsController.deleteItem)
 );

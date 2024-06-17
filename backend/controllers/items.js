@@ -2,16 +2,20 @@ const Item = require("../models/Item.js");
 const User = require("../models/user.js");
 const Retailer = require("../models/retailer.js");
 const Order = require("../models/order.js");
-const { cloudinary } = require("../cloudConfig.js");
+const expressError = require("../utils/expressError.js");
 
 module.exports.getHomePage = async (req, res) => {
-  let data = await Item.find({});
-  res.json(data);
+  try {
+    let data = await Item.find({});
+    res.json(data);
+  } catch (err) {
+    console.log(err);
+    throw new expressError(500, err);
+  }
 };
 
 module.exports.createItem = async (req, res) => {
   try {
-    console.log(req.body);
     let newItem = new Item(req.body);
     newItem.image = req.file.path;
     let retailer = await Retailer.findById(req.user._id).catch((err) => {
@@ -32,17 +36,20 @@ module.exports.createItem = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
+    throw new expressError(500, err);
   }
 };
 
 module.exports.showItem = async (req, res) => {
   try {
     let { id } = req.params;
+
     let item = await Item.findById(id)
       .populate("owner")
       .catch((err) => {
         console.log("item not found error");
       });
+
     if (!item) {
       console.log("item not found");
       res.json("itemNotFound");
@@ -51,6 +58,7 @@ module.exports.showItem = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
+    throw new expressError(500, err);
   }
 };
 
@@ -82,7 +90,7 @@ module.exports.editItem = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    res.json("some error occurred");
+    throw new expressError(500, err);
   }
 };
 
@@ -103,16 +111,12 @@ module.exports.deleteItem = async (req, res) => {
       if (retailer) {
         let deletedOrders = await Order.find({ productDetail: id });
         let deletedOrderIds = deletedOrders.map((order) => order._id);
-        console.log(deletedOrderIds);
-        await User.updateMany(
-          {},
-          {
-            $pull: {
-              cart: id,
-              orders: { $in: deletedOrderIds },
-            },
-          }
-        );
+        await User.updateMany({
+          $pull: {
+            cart: id,
+            orders: { $in: deletedOrderIds },
+          },
+        });
         await Order.deleteMany({ productDetail: id });
         res.json("deleted");
       } else {
@@ -121,6 +125,6 @@ module.exports.deleteItem = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    res.status(500);
+    throw new expressError(500, err);
   }
 };

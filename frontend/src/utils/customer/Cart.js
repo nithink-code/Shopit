@@ -24,7 +24,7 @@ let getCartDetails = async (
     }
   } catch (err) {
     console.log(err);
-    toast.warn("some error occured");
+    toast.error("some error occured");
     navigate("/");
   }
 };
@@ -49,7 +49,7 @@ let checkUserRole = async (
     }
   } catch (err) {
     console.log(err);
-    toast.warn("some error occured");
+    toast.error("some error occured");
     navigate("/");
   }
 };
@@ -85,7 +85,7 @@ let CartInfo = async (
     }
   } catch (err) {
     console.log(err);
-    toast.warn("some error occured");
+    toast.error("some error occured");
     navigate("/");
   }
 };
@@ -119,7 +119,7 @@ let deleteCartItem = async (
     }
   } catch (err) {
     console.log(err);
-    toast.warn("some error occured");
+    toast.error("some error occured");
     navigate("/");
   }
 };

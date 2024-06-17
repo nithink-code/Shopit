@@ -1,13 +1,12 @@
 let validateForm = (item, newErrors) => {
   let err = false;
-  console.log(item);
   if (item.name === "") {
     newErrors.name.errMsg = "Name is required";
     newErrors.name.valid = true;
     err = true;
   }
 
-  if (item.price === "") {
+  if (item.price === "" || item.price === "0") {
     newErrors.price.errMsg = "Price is required";
     newErrors.price.valid = true;
     err = true;

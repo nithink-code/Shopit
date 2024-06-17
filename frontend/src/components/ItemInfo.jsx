@@ -99,8 +99,9 @@ export default function ItemInfo({
             ) : (
               <>
                 <Button
-                  variant="success"
+                  variant="contained"
                   size="medium"
+                  color="success"
                   onClick={handleOpen}
                   style={{ marginLeft: "2rem" }}
                 >

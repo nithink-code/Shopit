@@ -39,7 +39,7 @@ let orderProduct = async (navigate, orderDetail, id, setOpen) => {
   } catch (err) {
     console.log(err);
     toast.error("Some error occured");
-    // navigate("/");
+    navigate("/");
   }
 };
 

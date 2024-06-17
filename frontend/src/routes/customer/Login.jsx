@@ -13,7 +13,6 @@ import {
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../theme.js";
 import NavBar2 from "../../components/NavBar2.jsx";
-import { ClassNames } from "@emotion/react";
 import "../../styles/Login.css";
 
 export default function Login() {

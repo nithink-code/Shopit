@@ -1,10 +1,6 @@
 import { useNavigate, Form, useLoaderData } from "react-router-dom";
 import axios from "axios";
-import ItemCrad from "../../components/ItemCard";
-import { Button } from "@mui/material";
-import Navbar from "../../components/Navbar";
 import "../../styles/item.css";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -22,6 +18,7 @@ export async function loader({ params }) {
 export default function RetailerItem() {
   let [showComponent, setShowComponent] = useState(false);
   const { itemInfo } = useLoaderData();
+  let [item, setItem] = useState(itemInfo);
   let navigate = useNavigate();
   let [navLogin, setNavLogin] = useState(false);
   let [loading, setLoading] = useState(false);
@@ -37,7 +34,15 @@ export default function RetailerItem() {
   };
 
   useEffect(() => {
-    checkLogin(axios, navigate, toast, itemInfo, setNavLogin, setShowComponent);
+    checkLogin(
+      axios,
+      navigate,
+      toast,
+      itemInfo,
+      setNavLogin,
+      setShowComponent,
+      setItem
+    );
   }, []);
 
   let deleteItemOperation = (id) => {
@@ -58,18 +63,14 @@ export default function RetailerItem() {
               />
               <div className="item">
                 <ItemInfo
-                  item={itemInfo}
+                  item={item}
                   retailer={true}
                   deleteItemOperation={deleteItemOperation}
                   loading={loading}
                   handleOpen={handleClickOpen}
                 />
               </div>
-              <StatsDialog
-                open={open}
-                handleClose={handleClose}
-                item={itemInfo}
-              />
+              <StatsDialog open={open} handleClose={handleClose} item={item} />
             </div>
           ) : null}
         </>

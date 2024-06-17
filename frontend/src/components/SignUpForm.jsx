@@ -2,10 +2,6 @@ import { Form } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextInput from "./TextInput.jsx";
 import "../styles/Form.css";
-import Navbar from "../components/Navbar";
-import { useState } from "react";
-import PasswordField from "./PasswordField.jsx";
-import { CircularProgress } from "@mui/material";
 import LoadButtton from "./LoadButton.jsx";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme.js";
@@ -21,7 +17,6 @@ export default function SignUpForm({
   return (
     <>
       <div className="form">
-        {/* <Navbar login={false} customerRole={true} loginPage={true} /> */}
         <h2>SignUp</h2>
         <Form
           onSubmit={(event) => {

@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 let checkAddCartBtn = async (
   axios,
   setAddedCart,
@@ -6,25 +8,30 @@ let checkAddCartBtn = async (
   setShowComponent,
   itemId
 ) => {
-  await axios.get(`/api/items/cart/${itemId}/isAdded`).then((data) => {
-    if (data.data === "presentInCart") {
-      displayElements(
-        setAddedCart,
-        setCartBtn,
-        setNavLogin,
-        setShowComponent,
-        true
-      );
-    } else if (data.data === "notPresentInCart") {
-      displayElements(
-        setAddedCart,
-        setCartBtn,
-        setNavLogin,
-        setShowComponent,
-        false
-      );
-    }
-  });
+  try {
+    await axios.get(`/api/items/cart/${itemId}/isAdded`).then((data) => {
+      if (data.data === "presentInCart") {
+        displayElements(
+          setAddedCart,
+          setCartBtn,
+          setNavLogin,
+          setShowComponent,
+          true
+        );
+      } else if (data.data === "notPresentInCart") {
+        displayElements(
+          setAddedCart,
+          setCartBtn,
+          setNavLogin,
+          setShowComponent,
+          false
+        );
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    toast.error("Some Error Ocurred");
+  }
 };
 
 let displayElements = (
@@ -80,6 +87,7 @@ let checkLogin = async (
     }
   } catch (err) {
     console.log(err);
+    toast.error("Some Error Ocurred");
   }
 };
 
@@ -99,6 +107,7 @@ let addToCart = async (axios, toast, itemId, setAddedCart, setLoading) => {
     })
     .catch((err) => {
       console.log(err);
+      toast.error("Some Error Ocurred");
     });
 };
 

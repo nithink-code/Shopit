@@ -58,12 +58,7 @@ export default function OrderDialog({ open, handleClose, item, setOpen }) {
   return (
     <ThemeProvider theme={theme}>
       <React.Fragment>
-        <Dialog
-          fullWidth={true}
-          maxWidth={"md"}
-          open={open}
-          onClose={handleClose}
-        >
+        <Dialog fullWidth={true} maxWidth={"md"} open={open}>
           <DialogTitle style={{ textAlign: "center" }}>{item.name}</DialogTitle>
           <IconButton
             aria-label="close"

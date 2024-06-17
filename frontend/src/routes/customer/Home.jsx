@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import "../../styles/Home.css";
 import ItemCrad from "../../components/ItemCard";
-import Navbar from "../../components/Navbar";
 import CircularProgress from "@mui/material/CircularProgress";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +19,6 @@ export default function Home() {
   let cardDetails = { name: true };
   let [navLogin, setNavLogin] = useState(false);
   let [roleIsCustomer, setRoleIsCustomer] = useState(false);
-  // let [notLogIn, setNotLogin] = useState(false);
 
   let navLogOutConfig = () => {
     setShowComponent(false);
@@ -34,7 +32,6 @@ export default function Home() {
       navigate,
       toast,
       setItems,
-      // setNotLogin,
       setNavLogin,
       setShowComponent,
       setRoleIsCustomer

@@ -1,17 +1,16 @@
 const Order = require("../models/order");
 const Item = require("../models/Item.js");
 const User = require("../models/user.js");
+const expressError = require("../utils/expressError.js");
 
 module.exports.placeOrder = async (req, res) => {
   try {
     let { id } = req.params;
-    console.log(req.body);
-    console.log(id);
+
     let product = await Item.findById(id).catch((err) => {
       console.log("Product not found error");
       console.log(err);
     });
-    console.log(product);
 
     if (product) {
       if (product.stock === 0) {
@@ -32,8 +31,6 @@ module.exports.placeOrder = async (req, res) => {
         const orderDateString = `${year}-${month}-${day}`;
         const orderDate = new Date(orderDateString);
 
-        console.log(orderDate);
-
         order.date = orderDate;
         let savedOrder = await order.save();
         let user = await User.findById(req.user._id).catch((err) => {
@@ -50,7 +47,7 @@ module.exports.placeOrder = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    res.json(err);
+    throw new expressError(500, err);
   }
 };
 
@@ -63,5 +60,6 @@ module.exports.allOrderDetails = async (req, res) => {
     res.json(user.orders);
   } catch (err) {
     console.log(err);
+    throw new expressError(500, err);
   }
 };

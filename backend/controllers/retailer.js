@@ -1,4 +1,5 @@
 const Retailer = require("../models/retailer.js");
+const expressError = require("../utils/expressError.js");
 
 module.exports.signUp = async (req, res) => {
   try {
@@ -32,6 +33,7 @@ module.exports.signUp = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
+    throw new expressError(500, err);
   }
 };
 
@@ -51,10 +53,15 @@ module.exports.isLoggedIn = (req, res) => {
   res.json("Logged In");
 };
 
-module.exports.restailerProducts = async (req, res) => {
-  let retailer = await Retailer.findById(req.user._id).populate("products");
-  if (retailer) {
-    res.json(retailer.products);
+module.exports.retailerProducts = async (req, res) => {
+  try {
+    let retailer = await Retailer.findById(req.user._id).populate("products");
+    if (retailer) {
+      res.json(retailer.products);
+    }
+  } catch (err) {
+    console.log(err);
+    throw new expressError(500, err);
   }
 };
 

@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import NavBar2 from "../../components/NavBar2";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { orderDetails } from "../../utils/customer/Order";
 import { CircularProgress } from "@mui/material";
 import OrderImageBtns from "../../components/OrderImageBtns";
@@ -39,7 +37,7 @@ export default function Orders() {
             customerRole={true}
             setShowComponent={setShowComponent}
           />
-          <h1>Your Orders</h1>
+          <h1 style={{ marginTop: "1rem" }}>Your Orders</h1>
           <div className="orderBtns">
             {orders.map((order) => {
               return (

@@ -10,9 +10,6 @@ const Item = require("./models/Item.js");
 const User = require("./models/user.js");
 
 module.exports.validateItemSchema = (req, res, next) => {
-  console.log("req.body:", req.body); // Add logging to debug
-  console.log("req.file:", req.file); // Add logging to debug
-
   if (!req.file) {
     throw new expressError(422, "Image is required");
   }
@@ -27,10 +24,6 @@ module.exports.validateItemSchema = (req, res, next) => {
 };
 
 module.exports.validateItemSchema2 = (req, res, next) => {
-  console.log("req.body:", req.body); // Add logging to debug
-  console.log("req.file:", req.file); // Add logging to debug
-  console.log("image", req.body.image);
-
   if (req.file === undefined) {
     if (req.body.image === "undefined") {
       throw new expressError(422, "Image is not entered");
@@ -89,12 +82,17 @@ module.exports.validateLoginForm = (req, res, next) => {
 };
 
 module.exports.isLoggedin = (req, res, next) => {
-  let { route } = req.body;
-  if (!req.isAuthenticated()) {
-    req.session.redirect = route;
-    res.json("notLogIn");
-  } else {
-    next();
+  try {
+    let { route } = req.body;
+    if (!req.isAuthenticated()) {
+      req.session.redirect = route;
+      res.json("notLogIn");
+    } else {
+      next();
+    }
+  } catch (err) {
+    console.log(err);
+    throw new expressError(500, err);
   }
 };
 
@@ -104,18 +102,24 @@ module.exports.redirect = (req, res, next) => {
 };
 
 module.exports.isOwner = async (req, res, next) => {
-  let { id } = req.params;
-  let item = await Item.findById(id)
-    .populate("owner")
-    .catch((err) => {
-      console.log("isOwner error");
-    });
-  if (!item) {
-    res.json("itemNotFound");
-  } else if (!item.owner._id.equals(req.user._id)) {
-    res.json("notOwner");
-  } else if (item.owner._id.equals(req.user._id)) {
-    next();
+  try {
+    let { id } = req.params;
+    let item = await Item.findById(id)
+      .populate("owner")
+      .catch((err) => {
+        console.log(err);
+        console.log("isOwner error");
+      });
+    if (!item) {
+      res.json("itemNotFound");
+    } else if (!item.owner._id.equals(req.user._id)) {
+      res.json("notOwner");
+    } else if (item.owner._id.equals(req.user._id)) {
+      next();
+    }
+  } catch (err) {
+    console.log(err);
+    throw new expressError(500, err);
   }
 };
 
@@ -147,43 +151,109 @@ module.exports.checkCartItem = async (req, res, next) => {
     }
   } catch (err) {
     console.log(err);
+    throw new expressError(500, err);
+  }
+};
+
+module.exports.deleteCheckCartItem = async (req, res, next) => {
+  try {
+    let { id } = req.params;
+
+    if (!req.user) {
+      console.log("not login");
+      res.json("You must login");
+    } else if (req.user.role === "retailer") {
+      res.json("Access denied for retailer");
+    } else {
+      let user = await User.findById(req.user._id)
+        .populate({
+          path: "cart",
+          match: { _id: id },
+        })
+        .catch((err) => {
+          console.log("No item found error");
+        });
+      if (user.cart.length === 0) {
+        res.json("ItemNotFoundInCart");
+      } else {
+        return next();
+      }
+    }
+  } catch (err) {
+    console.log(err);
+    throw new expressError(500, err);
   }
 };
 
 module.exports.findUserRole = (req, res, next) => {
-  if (req.user) {
-    return res.json(req.user);
-  } else {
-    return next();
+  try {
+    if (req.user) {
+      return res.json(req.user);
+    } else {
+      return next();
+    }
+  } catch (err) {
+    console.log(err);
+    throw new expressError(500, err);
   }
 };
 
 module.exports.UserRole = (req, res, next) => {
-  if (req.user) {
-    if (req.user.role === "customer") {
-      res.json("access denied for customers");
-    } else if (req.user.role === "retailer") {
-      return next();
+  try {
+    if (req.user) {
+      if (req.user.role === "customer") {
+        res.json("access denied for customers");
+      } else if (req.user.role === "retailer") {
+        return next();
+      }
+    } else {
+      res.json("notLogin");
     }
-  } else {
-    res.json("notLogin");
+  } catch (err) {
+    console.log(err);
+    throw new expressError(500, err);
   }
 };
 
 module.exports.loginFormIsLoggedIn = (req, res, next) => {
-  if (!req.isAuthenticated()) {
-    return res.json("notLogIn");
-  } else {
-    return next();
+  try {
+    if (!req.isAuthenticated()) {
+      return res.json("notLogIn");
+    } else {
+      return next();
+    }
+  } catch (err) {
+    console.log(err);
+    throw new expressError(500, err);
   }
 };
 
 module.exports.checkUserRoleLogin = (req, res, next) => {
-  if (!req.user) {
-    res.json("notLogin");
-  } else if (req.user && req.user.role != "customer") {
-    res.json("RoleIsRetailer");
-  } else {
-    next();
+  try {
+    if (!req.user) {
+      res.json("notLogin");
+    } else if (req.user && req.user.role != "customer") {
+      res.json("RoleIsRetailer");
+    } else {
+      next();
+    }
+  } catch (err) {
+    console.log(err);
+    throw new expressError(500, err);
+  }
+};
+
+module.exports.checkUserRoleLoginForRetailer = (req, res, next) => {
+  try {
+    if (!req.user) {
+      res.json("notLogin");
+    } else if (req.user && req.user.role != "retailer") {
+      res.json("RoleIsCustomer");
+    } else {
+      next();
+    }
+  } catch (err) {
+    console.log(err);
+    throw new expressError(500, err);
   }
 };

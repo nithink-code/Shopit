@@ -35,7 +35,6 @@ export default function NavBar2({
     await axios
       .get("/api/logOut")
       .then((res) => {
-        console.log(res);
         if (res.data === "loggedOut") {
           toast.success("Successfully Logged Out");
           if (window.location.pathname === "/") {

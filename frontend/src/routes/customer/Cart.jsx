@@ -1,4 +1,3 @@
-import Navbar from "../../components/Navbar";
 import CartItemCard from "../../components/CartItemCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -59,7 +58,7 @@ export default function Cart() {
               customerRole={roleIsCustomer}
               setShowComponent={setShowComponent}
             />
-            <h1>Your Cart</h1>
+            <h1 style={{ marginTop: "1rem" }}>Your Cart</h1>
             <div className="itemsList">
               {cartData.map((cartItem) => {
                 return (

@@ -1,5 +1,6 @@
 const { redirect } = require("../middlewares.js");
 const User = require("../models/user.js");
+const expressError = require("../utils/expressError.js");
 
 module.exports.signUp = async (req, res) => {
   try {
@@ -36,6 +37,7 @@ module.exports.signUp = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
+    throw new expressError(500, err);
   }
 };
 
@@ -59,15 +61,20 @@ module.exports.loginFailure = (req, res) => {
 };
 
 module.exports.logout = (req, res) => {
-  req.logOut((err) => {
-    if (err) {
-      console.log(err);
-      next(err);
-    } else {
-      console.log("loggedOut");
-      res.send("loggedOut");
-    }
-  });
+  try {
+    req.logOut((err) => {
+      if (err) {
+        console.log(err);
+        next(err);
+      } else {
+        console.log("loggedOut");
+        res.send("loggedOut");
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    throw new expressError(500, err);
+  }
 };
 
 module.exports.isLoggedIn = (req, res) => {

@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 let loading = (
   setShowComponent,
   setNavLogin,
@@ -10,19 +12,13 @@ let loading = (
   setShowComponent(true);
 };
 
-let notlogin = (setNotLogin, navnotlogin) => {
-  setNotLogin(navnotlogin);
-};
-
 let checkLogin = async (
   axios,
   setNavLogin,
   setItems,
   setShowComponent,
   setRoleIsCustomer,
-  roleiscustomer,
-  setNotLogin,
-  navnotlogin
+  roleiscustomer
 ) => {
   try {
     let status = await axios.post("/api/isLoggedIn");
@@ -36,8 +32,6 @@ let checkLogin = async (
         true,
         setRoleIsCustomer,
         roleiscustomer
-        // setNotLogin,
-        // navnotlogin
       );
     } else {
       getHomePageItems(
@@ -48,12 +42,11 @@ let checkLogin = async (
         false,
         setRoleIsCustomer,
         roleiscustomer
-        // setNotLogin,
-        // navnotlogin
       );
     }
   } catch (err) {
     console.log(err);
+    toast.error("Some Error Ocurred");
   }
 };
 
@@ -64,12 +57,9 @@ let getHomePageItems = async (
   setNavLogin,
   navlogin,
   setRoleIsCustomer,
-  roleiscustomer,
-  setNotLogin,
-  navnotlogin
+  roleiscustomer
 ) => {
   try {
-    // notlogin(setNotLogin, navnotlogin);
     let Itemdata = await axios.get("/api/items");
     let dataitems = Itemdata.data;
     setItems(dataitems);
@@ -82,6 +72,7 @@ let getHomePageItems = async (
     );
   } catch (err) {
     console.log(err);
+    toast.error("Some Error Ocurred");
   }
 };
 
@@ -90,7 +81,6 @@ let item = async (
   navigate,
   toast,
   setItems,
-  // setNotLogin,
   setNavLogin,
   setShowComponent,
   setRoleIsCustomer
@@ -108,8 +98,6 @@ let item = async (
         setShowComponent,
         setRoleIsCustomer,
         false
-        // setNotLogin,
-        // true
       );
     } else {
       checkLogin(
@@ -119,12 +107,11 @@ let item = async (
         setShowComponent,
         setRoleIsCustomer,
         true
-        // setNotLogin,
-        // false
       );
     }
   } catch (err) {
     console.log(err);
+    toast.error("Some Error ocurred");
   }
 };
 

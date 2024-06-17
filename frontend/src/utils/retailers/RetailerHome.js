@@ -7,48 +7,17 @@ let checkLogin = async (
   setShowComponent
 ) => {
   try {
-    let loginStatus = await axios.post("/api/retailer/isLoggedIn", {
-      route: window.location.pathname,
-    });
-    if (loginStatus.data === "notLogIn") {
-      toast.warn("You need to login");
-      navigate("/login");
-    } else {
-      checkUserRole(
-        axios,
-        navigate,
-        toast,
-        setProducts,
-        setNavLogin,
-        setShowComponent
-      );
-    }
+    getRetailersProducts(
+      axios,
+      setProducts,
+      setNavLogin,
+      setShowComponent,
+      toast,
+      navigate
+    );
   } catch (err) {
     console.log(err);
-    toast.warn("some error occured");
-    navigate("/");
-  }
-};
-
-let checkUserRole = async (
-  axios,
-  navigate,
-  toast,
-  setProducts,
-  setNavLogin,
-  setShowComponent
-) => {
-  try {
-    let userData = await axios.get("/api/getUserRole");
-    if (userData.data.role === "retailer") {
-      getRetailersProducts(axios, setProducts, setNavLogin, setShowComponent);
-    } else {
-      toast.error("Access denied");
-      navigate("/");
-    }
-  } catch (err) {
-    console.log(err);
-    toast.warn("some error occured");
+    toast.error("some error occured");
     navigate("/");
   }
 };
@@ -57,15 +26,25 @@ let getRetailersProducts = async (
   axios,
   setProducts,
   setNavLogin,
-  setShowComponent
+  setShowComponent,
+  toast,
+  navigate
 ) => {
   try {
     let products = await axios.get("/api/retailer/products");
-    setProducts(products.data);
-    displayElements(setNavLogin, setShowComponent);
+    if (products.data === "notLogin") {
+      toast.warn("You need to login");
+      navigate("/login");
+    } else if (products.data === "RoleIsCustomer") {
+      toast.error("Access denied for customers");
+      navigate("/");
+    } else {
+      setProducts(products.data);
+      displayElements(setNavLogin, setShowComponent);
+    }
   } catch (err) {
     console.log(err);
-    toast.warn("some error occured");
+    toast.error("some error occured");
     navigate("/");
   }
 };

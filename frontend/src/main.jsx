@@ -33,10 +33,10 @@ const router = createBrowserRouter([
     loader: itemLoader,
     errorElement: <ErrorPage />,
   },
-  {
-    path: "/error",
-    element: <ErrorPage />,
-  },
+  // {
+  //   path: "/error",
+  //   element: <ErrorPage />,
+  // },
   {
     path: "/signUp",
     element: <SignUp />,

@@ -1,8 +1,5 @@
-import { useNavigate, Form, useLoaderData } from "react-router-dom";
+import { useNavigate, useLoaderData } from "react-router-dom";
 import axios from "axios";
-import ItemCrad from "../../components/ItemCard";
-import { Button } from "@mui/material";
-import Navbar from "../../components/Navbar";
 import "../../styles/item.css";
 import "../../styles/Home.css";
 import "../../styles/Form.css";
@@ -44,10 +41,10 @@ export default function Item() {
     setOpen(false);
   };
 
-  let handleDialog = (value) => {
-    console.log(value);
-    setOpenDialog(value);
-  };
+  // let handleDialog = (value) => {
+  //   console.log(value);
+  //   setOpenDialog(value);
+  // };
 
   useEffect(() => {
     if (itemInfo === null || itemInfo === "itemNotFound") {
