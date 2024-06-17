@@ -68,7 +68,7 @@ export default function Login() {
     });
   };
 
-  return (
+  return showComponent ? (
     <div className={"auth"} style={{}}>
       <ThemeProvider theme={theme}>
         <NavBar2 login={false} setShowComponent={setShowComponent} />
@@ -80,66 +80,64 @@ export default function Login() {
             <span>Retailer</span>
           )}
         </h1>
-        {showComponent ? (
-          <>
-            {apiRoute === "items/login" ? (
-              <>
-                <Button
-                  variant="contained"
-                  onClick={() => {
-                    setApiRoute("items/login");
-                  }}
-                  style={{ backgroundColor: "#1976d2", color: "white" }}
-                  disabled
-                >
-                  <b>Customer</b>
-                </Button>
-                <Button
-                  variant="contained"
-                  onClick={() => {
-                    setApiRoute("retailer/login");
-                  }}
-                  style={{ backgroundColor: "#BDBDBD", color: "black" }}
-                >
-                  Retailer
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button
-                  variant="contained"
-                  onClick={() => {
-                    setApiRoute("items/login");
-                  }}
-                  style={{ backgroundColor: "#BDBDBD", color: "black" }}
-                >
-                  Customer
-                </Button>
-                <Button
-                  variant="contained"
-                  onClick={() => {
-                    setApiRoute("retailer/login");
-                  }}
-                  style={{ backgroundColor: "#1976d2", color: "white" }}
-                  disabled
-                >
-                  <b>Retailer</b>
-                </Button>
-              </>
-            )}
-            <LoginForm
-              preventFormDefaultFunction={preventFormDefaultOperation}
-              login={loginData}
-              ValidateErrors={error}
-              setFormData={setForm}
-              route={apiRoute}
-              loading={loading}
-            />
-          </>
-        ) : (
-          <CircularProgress />
-        )}
+        <>
+          {apiRoute === "items/login" ? (
+            <>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  setApiRoute("items/login");
+                }}
+                style={{ backgroundColor: "#1976d2", color: "white" }}
+                disabled
+              >
+                <b>Customer</b>
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  setApiRoute("retailer/login");
+                }}
+                style={{ backgroundColor: "#BDBDBD", color: "black" }}
+              >
+                Retailer
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  setApiRoute("items/login");
+                }}
+                style={{ backgroundColor: "#BDBDBD", color: "black" }}
+              >
+                Customer
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  setApiRoute("retailer/login");
+                }}
+                style={{ backgroundColor: "#1976d2", color: "white" }}
+                disabled
+              >
+                <b>Retailer</b>
+              </Button>
+            </>
+          )}
+          <LoginForm
+            preventFormDefaultFunction={preventFormDefaultOperation}
+            login={loginData}
+            ValidateErrors={error}
+            setFormData={setForm}
+            route={apiRoute}
+            loading={loading}
+          />
+        </>
       </ThemeProvider>
     </div>
+  ) : (
+    <CircularProgress />
   );
 }

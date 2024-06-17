@@ -97,6 +97,10 @@ passport.deserializeUser(function (obj, done) {
   }
 });
 
+app.get("/", (req, res) => {
+  res.json("Success");
+});
+
 app.get("/api/getUserRole", findUserRole, (req, res) => {
   res.json({ role: undefined });
 });
