@@ -6,6 +6,7 @@ import { CircularProgress } from "@mui/material";
 import OrderImageBtns from "../../components/OrderImageBtns";
 import "../../styles/Order.css";
 import ViewOrderDialog from "../../components/ViewOrderDialog";
+import Footer from "../../components/Footer";
 
 export default function Orders() {
   let navigate = useNavigate();

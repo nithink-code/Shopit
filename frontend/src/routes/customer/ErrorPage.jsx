@@ -8,33 +8,42 @@ import { toast } from "react-toastify";
 
 export default function ErrorPage() {
   let navigate = useNavigate();
-  let [navLoginStatus, setNavLoginStatus] = useState(true);
+  let [navLoginStatus, setNavLoginStatus] = useState(false);
+  let [showComponent, setShowComponent] = useState(false);
+  let [customerRole, setCustomerRole] = useState(false);
   let error = useRouteError();
-  console.log(error);
 
   useEffect(() => {
     async function checkLogin() {
-      await axios
-        .post("/api/isLoggedIn", { route: window.location.pathname })
-        .then((status) => {
-          let res = status.data;
-          if (res === "notLogIn") {
-            setNavLoginStatus(false);
-            navigate("/login");
-          } else if (res === "LoggedIn") {
-            setNavLoginStatus(true);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      try {
+        let data = await axios.get("/api/getUserRole");
+        if (data.data.role === undefined) {
+          setShowComponent(true);
+        } else if (data.data.role === "customer") {
+          setCustomerRole(true);
+          setNavLoginStatus(true);
+          setShowComponent(true);
+        } else if (data.data.role === "retailer") {
+          setCustomerRole(false);
+          setNavLoginStatus(true);
+          setShowComponent(true);
+        }
+      } catch (err) {
+        console.log(err);
+        toast.error("Some error occured");
+        navigate("/");
+      }
     }
     checkLogin();
   }, []);
 
   return (
     <div className="errorPage">
-      <NavBar2 login={navLoginStatus} />
+      <NavBar2
+        login={navLoginStatus}
+        customerRole={customerRole}
+        setShowComponent={setShowComponent}
+      />
       <Alert severity="error">
         {" "}
         <h1>Oops there was an error</h1>

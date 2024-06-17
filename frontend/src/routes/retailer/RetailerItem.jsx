@@ -8,6 +8,7 @@ import { checkLogin, deleteItem } from "../../utils/retailers/RetailerItem";
 import ItemInfo from "../../components/ItemInfo";
 import NavBar2 from "../../components/NavBar2";
 import StatsDialog from "../../components/StatsDialog";
+import Footer from "../../components/Footer";
 
 export async function loader({ params }) {
   let itemData = await axios.get(`/api/items/${params.productId}`);

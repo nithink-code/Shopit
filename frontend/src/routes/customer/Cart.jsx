@@ -12,6 +12,7 @@ import LoadButtton from "../../components/LoadButton";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../theme.js";
 import NavBar2 from "../../components/NavBar2.jsx";
+import Footer from "../../components/Footer";
 
 export default function Cart() {
   let navigate = useNavigate();

@@ -8,6 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import "../../styles/Home.css";
 import { checkLogin } from "../../utils/retailers/RetailerHome";
 import NavBar2 from "../../components/NavBar2";
+import Footer from "../../components/Footer";
 
 export default function RetailerHome() {
   let navigate = useNavigate();

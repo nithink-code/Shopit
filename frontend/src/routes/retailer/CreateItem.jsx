@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { CircularProgress } from "@mui/material";
 import { checkLogin } from "../../utils/retailers/CreateItem";
 import NavBar2 from "../../components/NavBar2";
+import Footer from "../../components/Footer";
 
 export default function CreateItem() {
   let navigate = useNavigate();

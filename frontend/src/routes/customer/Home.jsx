@@ -11,6 +11,7 @@ import "../../styles/item.css";
 import "../../styles/Form.css";
 import "../../styles/Navbar.css";
 import NavBar2 from "../../components/NavBar2";
+import Footer from "../../components/Footer";
 
 export default function Home() {
   let navigate = useNavigate();
@@ -41,25 +42,28 @@ export default function Home() {
   return (
     <>
       {showComponent ? (
-        <div className="homepage">
-          <NavBar2
-            login={navLogin}
-            customerRole={roleIsCustomer}
-            homePageLogOut={navLogOutConfig}
-            setShowComponent={setShowComponent}
-          />
-          <div className="itemsList">
-            {items.map((singleItem) =>
-              singleItem.stock !== 0 ? (
-                <a href={`/item/${singleItem._id}`} key={singleItem._id}>
-                  <div className="items">
-                    <ItemCrad item={singleItem} cardDetails={cardDetails} />
-                  </div>
-                </a>
-              ) : null
-            )}
+        <>
+          <div className="homepage">
+            <NavBar2
+              login={navLogin}
+              customerRole={roleIsCustomer}
+              homePageLogOut={navLogOutConfig}
+              setShowComponent={setShowComponent}
+            />
+            <div className="itemsList">
+              {items.map((singleItem) =>
+                singleItem.stock !== 0 ? (
+                  <a href={`/item/${singleItem._id}`} key={singleItem._id}>
+                    <div className="items">
+                      <ItemCrad item={singleItem} cardDetails={cardDetails} />
+                    </div>
+                  </a>
+                ) : null
+              )}
+            </div>
           </div>
-        </div>
+          {/* <Footer /> */}
+        </>
       ) : (
         <CircularProgress />
       )}

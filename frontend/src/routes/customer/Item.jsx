@@ -11,6 +11,7 @@ import { checkLogin, addToCart } from "../../utils/customer/Item";
 import ItemInfo from "../../components/ItemInfo";
 import NavBar2 from "../../components/NavBar2";
 import OrderDialog from "../../components/OrderDialog";
+import Footer from "../../components/Footer";
 
 export async function loader({ params }) {
   let itemData = await axios.get(`/api/items/${params.id}`);
@@ -40,11 +41,6 @@ export default function Item() {
   const handleClose = () => {
     setOpen(false);
   };
-
-  // let handleDialog = (value) => {
-  //   console.log(value);
-  //   setOpenDialog(value);
-  // };
 
   useEffect(() => {
     if (itemInfo === null || itemInfo === "itemNotFound") {

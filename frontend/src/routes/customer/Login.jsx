@@ -14,6 +14,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../theme.js";
 import NavBar2 from "../../components/NavBar2.jsx";
 import "../../styles/Login.css";
+import Footer from "../../components/Footer";
 
 export default function Login() {
   let navigate = useNavigate();

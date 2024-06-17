@@ -18,10 +18,11 @@ const retailerRouter = require("./routes/retailer.js");
 const orderRouter = require("./routes/order.js");
 const { findUserRole, loginFormIsLoggedIn } = require("./middlewares.js");
 const wrapAsync = require("./utils/wrapAsync.js");
+const MongoStore = require("connect-mongo");
 
 const port = 8080;
 
-const DB_URL = "mongodb://127.0.0.1:27017/shopit";
+const DB_URL = process.env.DB_URL;
 
 main()
   .then(console.log("DB CONNECTED"))
@@ -33,8 +34,21 @@ async function main() {
   await mongoose.connect(DB_URL);
 }
 
+const store = MongoStore.create({
+  mongoUrl: DB_URL,
+  crypto: {
+    secret: process.env.SECRET,
+  },
+  touchAfter: 24 * 3600,
+});
+
+store.on("error", (err) => {
+  console.log("Error occured in mongo session store", err);
+});
+
 const sessionOptions = {
-  secret: "MySecretKey",
+  store,
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {

@@ -7,6 +7,7 @@ import { CircularProgress } from "@mui/material";
 import { toast } from "react-toastify";
 import { checkLogin } from "../../utils/retailers/EditItem";
 import NavBar2 from "../../components/NavBar2";
+import Footer from "../../components/Footer";
 
 export async function loader({ params }) {
   let itemData = await axios.get(`/api/items/${params.productId}`);

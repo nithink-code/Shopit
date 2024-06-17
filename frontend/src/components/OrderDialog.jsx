@@ -81,7 +81,7 @@ export default function OrderDialog({ open, handleClose, item, setOpen }) {
             }}
           >
             <Typography component={"div"} className="imageContent">
-              <img src={item.image} alt={item.name} />
+              <img src={item.image} alt={item.name} style={{ width: "100%" }} />
               <Stock stock={item.stock} />
               <div className="quantitySetter">
                 <QuantitySetter
