@@ -187,7 +187,7 @@ module.exports.deleteCheckCartItem = async (req, res, next) => {
 
 module.exports.findUserRole = (req, res, next) => {
   try {
-    if (req.user) {
+    if (req.isAuthenticated()) {
       return res.json(req.user);
     } else {
       return next();
