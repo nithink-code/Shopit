@@ -24,7 +24,7 @@ let checkLogin = async (
   roleiscustomer
 ) => {
   try {
-    let status = await axios.post(`${server}/api/isLoggedIn`);
+    let status = await axios.post(`${server}api/isLoggedIn`);
     let res = status.data;
     if (res === "LoggedIn") {
       getHomePageItems(
@@ -63,7 +63,7 @@ let getHomePageItems = async (
   roleiscustomer
 ) => {
   try {
-    let Itemdata = await axios.get(`${server}/api/items`);
+    let Itemdata = await axios.get(`${server}api/items`);
     let dataitems = Itemdata.data;
     setItems(dataitems);
     loading(
