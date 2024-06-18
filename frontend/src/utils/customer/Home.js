@@ -89,7 +89,7 @@ let item = async (
   setRoleIsCustomer
 ) => {
   try {
-    let data = await axios.get(`${server}/api/getUserRole`);
+    let data = await axios.get(`${server}api/getUserRole`);
     console.log(data);
     if (data.data.role === "retailer") {
       toast.warn("You need to log out of retailer role");
