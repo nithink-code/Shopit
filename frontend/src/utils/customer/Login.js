@@ -44,6 +44,7 @@ let preventFormDefaultFunction = async (
     if (!err) {
       loadBtn(setLoading, true);
       let authData = await axios.post(`${server}api/${route}`, loginData);
+      console.log(authData);
       if (authData.data.loginStatus === "successLogin") {
         toast.success("Logged in successfully ");
         navigate(`${authData.data.redirect}`);
