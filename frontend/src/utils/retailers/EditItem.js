@@ -1,3 +1,5 @@
+import { server } from "../../server";
+
 let checkLogin = async (
   axios,
   navigate,
@@ -7,7 +9,7 @@ let checkLogin = async (
   itemId
 ) => {
   try {
-    let status = await axios.post("/api/isLoggedIn", {
+    let status = await axios.post(`${server}api/isLoggedIn`, {
       route: window.location.pathname,
     });
     let res = status.data;
@@ -40,7 +42,7 @@ let checkUserRole = async (
   itemId
 ) => {
   try {
-    let userData = await axios.get("/api/getUserRole");
+    let userData = await axios.get(`${server}api/getUserRole`);
     if (userData.data.role !== "retailer") {
       toast.error("Access denied");
       navigate("/");
@@ -70,7 +72,9 @@ let checkOwnership = async (
   itemId
 ) => {
   try {
-    let owner = await axios.post(`/api/retailer/items/${itemId}/isOwner`);
+    let owner = await axios.post(
+      `${server}api/retailer/items/${itemId}/isOwner`
+    );
     if (owner.data === null || owner.data === "itemNotFound") {
       toast.warn("No such product exists");
       navigate("/retailer");

@@ -1,8 +1,6 @@
 import { toast } from "react-toastify";
 import { server } from "../../server";
 
-// const server = import.meta.env.VITE_API_URL;
-
 let loading = (
   setShowComponent,
   setNavLogin,

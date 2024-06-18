@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { server } from "../../server";
 
 //Order Dialog
 
@@ -19,7 +20,7 @@ let handleQuantChange = (setOrderDetail, add, item) => {
 
 let orderProduct = async (navigate, orderDetail, id, setOpen) => {
   try {
-    let res = await axios.post(`/api/order/item/${id}`, orderDetail);
+    let res = await axios.post(`${server}api/order/item/${id}`, orderDetail);
     if (res.data === "notLogin") {
       toast.warn("You need to Login");
       navigate("/login");
@@ -51,7 +52,7 @@ let orderDetails = async (
   setOrders
 ) => {
   try {
-    let res = await axios.get("/api/order/item");
+    let res = await axios.get(`${server}api/order/item`);
     if (res.data === "notLogin") {
       toast.warn("You must login");
       navigate("/login");

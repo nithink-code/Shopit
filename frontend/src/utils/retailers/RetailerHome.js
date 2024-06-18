@@ -1,3 +1,5 @@
+import { server } from "../../server";
+
 let checkLogin = async (
   axios,
   navigate,
@@ -31,7 +33,7 @@ let getRetailersProducts = async (
   navigate
 ) => {
   try {
-    let products = await axios.get("/api/retailer/products");
+    let products = await axios.get(`${server}api/retailer/products`);
     if (products.data === "notLogin") {
       toast.warn("You need to login");
       navigate("/login");

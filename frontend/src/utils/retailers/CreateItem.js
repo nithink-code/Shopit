@@ -1,3 +1,5 @@
+import { server } from "../../server";
+
 let checkLogin = async (
   axios,
   navigate,
@@ -6,14 +8,14 @@ let checkLogin = async (
   setShowComponent
 ) => {
   try {
-    let status = await axios.post("/api/isLoggedIn", {
+    let status = await axios.post(`${server}api/isLoggedIn`, {
       route: window.location.pathname,
     });
     if (status.data === "notLogIn") {
       toast.warn("You must be Logged in");
       navigate("/login");
     } else {
-      let userData = await axios.get("/api/getUserRole");
+      let userData = await axios.get(`${server}api/getUserRole`);
       if (userData.data.role !== "retailer") {
         toast.error("Access denied");
         navigate("/");

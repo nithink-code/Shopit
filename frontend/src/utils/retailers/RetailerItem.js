@@ -1,3 +1,5 @@
+import { server } from "../../server";
+
 let checkLogin = async (
   axios,
   navigate,
@@ -7,7 +9,7 @@ let checkLogin = async (
   setShowComponent
 ) => {
   try {
-    let status = await axios.get("/api/retailer/roleAndLogin");
+    let status = await axios.get(`${server}api/retailer/roleAndLogin`);
     if (status.data === "notLogin") {
       toast.warn("You must be Logged in");
       navigate("/login");
@@ -45,7 +47,9 @@ let checkOwnership = async (
   setShowComponent
 ) => {
   try {
-    let owner = await axios.post(`/api/retailer/items/${itemInfo._id}/isOwner`);
+    let owner = await axios.post(
+      `${server}api/retailer/items/${itemInfo._id}/isOwner`
+    );
     if (owner.data === "notOwner") {
       toast.warn("You are not the owner");
       navigate("/retailer");
@@ -77,7 +81,7 @@ let deleteItem = async (axios, navigate, toast, id, setLoading) => {
 
 let deleteOperation = async (axios, navigate, toast, id) => {
   try {
-    let dataInfo = await axios.delete(`/api/items/${id}`);
+    let dataInfo = await axios.delete(`${server}api/items/${id}`);
     if (dataInfo.data === "notLogin") {
       toast.warn("You must be Logged in");
       navigate("/login");

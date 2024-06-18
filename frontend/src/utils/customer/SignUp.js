@@ -1,6 +1,8 @@
+import { server } from "../../server";
+
 let checkLogin = async (axios, navigate, toast, setShowComponent) => {
   try {
-    let status = await axios.get("/api/loginForm/isLoggedIn");
+    let status = await axios.get(`${server}api/loginForm/isLoggedIn`);
     if (status.data === "LoggedIn") {
       toast.warn("You are logged in");
       navigate("/");
@@ -37,7 +39,7 @@ let preventFormDefaultFunction = async (
     validation(newErrors);
     if (!err) {
       loadBtn(setLoading, true);
-      let authData = await axios.post(`/api/${route}`, signUpData);
+      let authData = await axios.post(`${server}api/${route}`, signUpData);
       if (authData.data.signUpStatus === "success signUp") {
         toast.success("Account Created Successfully");
         navigate(`${authData.data.redirect}`);

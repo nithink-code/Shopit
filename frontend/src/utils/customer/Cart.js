@@ -1,3 +1,5 @@
+import { server } from "../../server";
+
 let getCartDetails = async (
   axios,
   navigate,
@@ -7,7 +9,7 @@ let getCartDetails = async (
   setShowComponent
 ) => {
   try {
-    let cardData = await axios.get("/api/items/cart/cartdetails");
+    let cardData = await axios.get(`${server}api/items/cart/cartdetails`);
     if (cardData.data === "notLogIn") {
       toast.warn("You must be Logged in");
       navigate("/login");
@@ -39,7 +41,7 @@ let checkUserRole = async (
   setShowComponent
 ) => {
   try {
-    let userData = await axios.get("/api/getUserRole");
+    let userData = await axios.get(`${server}api/getUserRole`);
     if (userData.data.role === "customer") {
       setCartData(cardData.data);
       showComponents(setNavLogin, setShowComponent);
@@ -68,7 +70,7 @@ let CartInfo = async (
   setShowComponent
 ) => {
   try {
-    let cardData = await axios.get("/api/items/cart/cartdetails");
+    let cardData = await axios.get(`${server}api/items/cart/cartdetails`);
     if (cardData.data === "notLogIn") {
       toast.warn("You must be Logged in");
       navigate("/login");
@@ -101,7 +103,7 @@ let deleteCartItem = async (
   setLoading
 ) => {
   try {
-    let data = await axios.delete(`/api/items/cart/${id}`);
+    let data = await axios.delete(`${server}api/items/cart/${id}`);
     if (data.data === "notLogIn") {
       toast.warn("You need to login");
       navigate("/login");

@@ -1,6 +1,8 @@
+import { server } from "../../server";
+
 let checkLogin = async (axios, navigate, toast, setShowComponent) => {
   try {
-    let status = await axios.get("/api/loginForm/isLoggedIn");
+    let status = await axios.get(`${server}api/loginForm/isLoggedIn`);
     if (status.data === "LoggedIn") {
       toast.warn("You are logged in");
       navigate("/");
@@ -41,7 +43,7 @@ let preventFormDefaultFunction = async (
     validation(newErrors);
     if (!err) {
       loadBtn(setLoading, true);
-      let authData = await axios.post(`/api/${route}`, loginData);
+      let authData = await axios.post(`${server}api/${route}`, loginData);
       if (authData.data.loginStatus === "successLogin") {
         toast.success("Logged in successfully ");
         navigate(`${authData.data.redirect}`);
