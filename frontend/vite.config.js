@@ -13,7 +13,7 @@ console.log("VITE_API_URL:", process.env.VITE_API_URL);
 export default defineConfig({
   server: {
     proxy: {
-      "/api": `${process.env.VITE_API_URL}`,
+      "/api": `http://localhost:8080`,
     },
   },
   plugins: [react()],

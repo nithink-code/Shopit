@@ -7,6 +7,7 @@ let loading = (
   setRoleIsCustomer,
   roleiscustomer
 ) => {
+  console.log(navlogin);
   setRoleIsCustomer(roleiscustomer);
   setNavLogin(navlogin);
   setShowComponent(true);
@@ -21,7 +22,9 @@ let checkLogin = async (
   roleiscustomer
 ) => {
   try {
-    let status = await axios.post("/api/isLoggedIn");
+    let status = await axios.post(
+      "https://shopit-server-omega.vercel.app/api/isLoggedIn"
+    );
     let res = status.data;
     if (res === "LoggedIn") {
       getHomePageItems(
@@ -60,7 +63,9 @@ let getHomePageItems = async (
   roleiscustomer
 ) => {
   try {
-    let Itemdata = await axios.get("/api/items");
+    let Itemdata = await axios.get(
+      "https://shopit-server-omega.vercel.app/api/items"
+    );
     let dataitems = Itemdata.data;
     setItems(dataitems);
     loading(
@@ -86,11 +91,15 @@ let item = async (
   setRoleIsCustomer
 ) => {
   try {
-    let data = await axios.get("/api/getUserRole");
+    let data = await axios.get(
+      "https://shopit-server-omega.vercel.app/api/getUserRole"
+    );
+    console.log(data);
     if (data.data.role === "retailer") {
       toast.warn("You need to log out of retailer role");
       navigate(`/retailer`);
     } else if (data.data.role === undefined) {
+      console.log(data.data.role);
       checkLogin(
         axios,
         setNavLogin,

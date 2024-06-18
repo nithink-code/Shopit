@@ -19,6 +19,15 @@ const orderRouter = require("./routes/order.js");
 const { findUserRole, loginFormIsLoggedIn } = require("./middlewares.js");
 const wrapAsync = require("./utils/wrapAsync.js");
 const MongoStore = require("connect-mongo");
+const cors = require("cors");
+
+const corsOptions = {
+  origin: ["https://shopit-five.vercel.app"],
+  methods: ["GET,PUT,PATCH,POST,DELETE"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 const port = 8080;
 
