@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
+import { server } from "../../server";
 
-const server = import.meta.env.VITE_API_URL;
+// const server = import.meta.env.VITE_API_URL;
 
 let loading = (
   setShowComponent,
@@ -9,7 +10,6 @@ let loading = (
   setRoleIsCustomer,
   roleiscustomer
 ) => {
-  console.log(navlogin);
   setRoleIsCustomer(roleiscustomer);
   setNavLogin(navlogin);
   setShowComponent(true);
@@ -90,12 +90,10 @@ let item = async (
 ) => {
   try {
     let data = await axios.get(`${server}api/getUserRole`);
-    console.log(data);
     if (data.data.role === "retailer") {
       toast.warn("You need to log out of retailer role");
       navigate(`/retailer`);
     } else if (data.data.role === undefined) {
-      console.log(data.data.role);
       checkLogin(
         axios,
         setNavLogin,

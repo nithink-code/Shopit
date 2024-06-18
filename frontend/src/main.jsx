@@ -98,6 +98,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       style={{ marginTop: "5rem" }}
     />
     <RouterProvider router={router} />
-    {/* <App /> */}
   </>
 );
