@@ -1,5 +1,7 @@
 import { toast } from "react-toastify";
 
+const server = import.meta.env.VITE_API_URL;
+
 let loading = (
   setShowComponent,
   setNavLogin,
@@ -22,9 +24,7 @@ let checkLogin = async (
   roleiscustomer
 ) => {
   try {
-    let status = await axios.post(
-      "https://shopit-server-omega.vercel.app/api/isLoggedIn"
-    );
+    let status = await axios.post(`${server}/api/isLoggedIn`);
     let res = status.data;
     if (res === "LoggedIn") {
       getHomePageItems(
@@ -63,9 +63,7 @@ let getHomePageItems = async (
   roleiscustomer
 ) => {
   try {
-    let Itemdata = await axios.get(
-      "https://shopit-server-omega.vercel.app/api/items"
-    );
+    let Itemdata = await axios.get(`${server}/api/items`);
     let dataitems = Itemdata.data;
     setItems(dataitems);
     loading(
@@ -91,9 +89,7 @@ let item = async (
   setRoleIsCustomer
 ) => {
   try {
-    let data = await axios.get(
-      "https://shopit-server-omega.vercel.app/api/getUserRole"
-    );
+    let data = await axios.get(`${server}/api/getUserRole`);
     console.log(data);
     if (data.data.role === "retailer") {
       toast.warn("You need to log out of retailer role");
