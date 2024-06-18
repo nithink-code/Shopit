@@ -22,7 +22,7 @@ const MongoStore = require("connect-mongo");
 const cors = require("cors");
 
 const corsOptions = {
-  origin: ["https://shopit-five.vercel.app/"],
+  origin: ["https://shopit-five.vercel.app"],
   methods: ["GET,PUT,PATCH,POST,DELETE"],
   credentials: true,
 };
