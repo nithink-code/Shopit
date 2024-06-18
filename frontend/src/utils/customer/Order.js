@@ -75,6 +75,7 @@ let displayComponents = (setShowComponent, value) => {
   setShowComponent(value);
 };
 
+//to check login status
 let loginStatus = (setLogin, value) => {
   setLogin(value);
 };
