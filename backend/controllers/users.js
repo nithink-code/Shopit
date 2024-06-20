@@ -42,6 +42,8 @@ module.exports.signUp = async (req, res) => {
 };
 
 module.exports.login = (req, res) => {
+  console.log(res.locals.redirect);
+  console.log(req.isAuthenticated());
   if (res.locals.redirect === undefined) {
     res.json({
       loginStatus: "directLogin",

@@ -85,7 +85,7 @@ module.exports.isLoggedin = (req, res, next) => {
   try {
     let { route } = req.body;
     if (!req.isAuthenticated()) {
-      req.session.redirect = route;
+      req.session.returnTo = route;
       res.json("notLogIn");
     } else {
       next();
@@ -97,7 +97,7 @@ module.exports.isLoggedin = (req, res, next) => {
 };
 
 module.exports.redirect = (req, res, next) => {
-  res.locals.redirect = req.session.redirect;
+  res.locals.redirect = req.session.returnTo;
   next();
 };
 

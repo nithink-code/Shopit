@@ -11,7 +11,9 @@ let checkAddCartBtn = async (
 ) => {
   try {
     await axios
-      .get(`${server}api/items/cart/${itemId}/isAdded`)
+      .get(`${server}/api/items/cart/${itemId}/isAdded`, {
+        withCredentials: true,
+      })
       .then((data) => {
         if (data.data === "presentInCart") {
           displayElements(
@@ -65,28 +67,38 @@ let checkLogin = async (
   itemId
 ) => {
   try {
-    let status = await axios.post(`${server}api/isLoggedIn`, {
-      route: window.location.pathname,
-    });
+    let status = await axios.post(
+      `${server}/api/isLoggedIn`,
+      {
+        route: window.location.pathname,
+      },
+      {
+        withCredentials: true,
+      }
+    );
     if (status.data === "notLogIn") {
       toast.warn("You must be Logged in");
       navigate("/login");
     } else {
-      await axios.get(`${server}api/getUserRole`).then((userData) => {
-        if (userData.data.role === "retailer") {
-          toast.warn("You need to log out of retailer role");
-          navigate(`/retailer/`);
-        } else {
-          checkAddCartBtn(
-            axios,
-            setAddedCart,
-            setCartBtn,
-            setNavLogin,
-            setShowComponent,
-            itemId
-          );
-        }
-      });
+      await axios
+        .get(`${server}/api/getUserRole`, {
+          withCredentials: true,
+        })
+        .then((userData) => {
+          if (userData.data.role === "retailer") {
+            toast.warn("You need to log out of retailer role");
+            navigate(`/retailer/`);
+          } else {
+            checkAddCartBtn(
+              axios,
+              setAddedCart,
+              setCartBtn,
+              setNavLogin,
+              setShowComponent,
+              itemId
+            );
+          }
+        });
     }
   } catch (err) {
     console.log(err);
@@ -96,7 +108,9 @@ let checkLogin = async (
 
 let addToCart = async (axios, toast, itemId, setAddedCart, setLoading) => {
   await axios
-    .get(`${server}api/items/cart/${itemId}/addcart`)
+    .get(`${server}/api/items/cart/${itemId}/addcart`, {
+      withCredentials: true,
+    })
     .then((data) => {
       if (data.data === "presentInCart") {
         toast.warn("Product already present in cart");

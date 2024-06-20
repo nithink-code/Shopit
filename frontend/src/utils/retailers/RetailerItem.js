@@ -9,7 +9,9 @@ let checkLogin = async (
   setShowComponent
 ) => {
   try {
-    let status = await axios.get(`${server}api/retailer/roleAndLogin`);
+    let status = await axios.get(`${server}/api/retailer/roleAndLogin`, {
+      withCredentials: true,
+    });
     if (status.data === "notLogin") {
       toast.warn("You must be Logged in");
       navigate("/login");
@@ -47,8 +49,11 @@ let checkOwnership = async (
   setShowComponent
 ) => {
   try {
-    let owner = await axios.post(
-      `${server}api/retailer/items/${itemInfo._id}/isOwner`
+    let owner = await axios.get(
+      `${server}/api/retailer/items/${itemInfo._id}/isOwner`,
+      {
+        withCredentials: true,
+      }
     );
     if (owner.data === "notOwner") {
       toast.warn("You are not the owner");
@@ -81,7 +86,9 @@ let deleteItem = async (axios, navigate, toast, id, setLoading) => {
 
 let deleteOperation = async (axios, navigate, toast, id) => {
   try {
-    let dataInfo = await axios.delete(`${server}api/items/${id}`);
+    let dataInfo = await axios.delete(`${server}/api/items/${id}`, {
+      withCredentials: true,
+    });
     if (dataInfo.data === "notLogin") {
       toast.warn("You must be Logged in");
       navigate("/login");

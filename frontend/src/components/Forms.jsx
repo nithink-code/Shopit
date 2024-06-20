@@ -39,11 +39,18 @@ export default function Forms({
     data.append("stock", item.stock);
     if (!err) {
       setLoading(true);
-      await axios[requestType](`/api/${apiRoute}`, data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
+      await axios[requestType](
+        `/api/${apiRoute}`,
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         },
-      })
+        {
+          withCredentials: true,
+        }
+      )
         .then((apiData) => {
           let data = apiData.data;
           if (data === "Retailer not found") {

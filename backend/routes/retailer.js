@@ -3,11 +3,12 @@ const router = express.Router();
 const passport = require("passport");
 const wrapAsync = require("../utils/wrapAsync");
 const Retailer = require("../models/retailer.js");
-const { isLoggedin, isOwner } = require("../middlewares.js");
+const { isLoggedin, isOwner, userAdminRole } = require("../middlewares.js");
 const {
   validateLoginForm,
   validateSignUpForm,
   checkUserRoleLoginForRetailer,
+  isLoggedin2,
 } = require("../middlewares.js");
 const reatilerController = require("../controllers/retailer.js");
 
@@ -42,6 +43,6 @@ router.get("/roleAndLogin", checkUserRoleLoginForRetailer, (req, res) => {
 });
 
 //separate route to check owner of the product
-router.post("/items/:id/isOwner", isOwner, reatilerController.isOwner);
+router.get("/items/:id/isOwner", isOwner, reatilerController.Owner);
 
 module.exports = router;

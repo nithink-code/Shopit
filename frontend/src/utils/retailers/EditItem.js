@@ -9,9 +9,15 @@ let checkLogin = async (
   itemId
 ) => {
   try {
-    let status = await axios.post(`${server}api/isLoggedIn`, {
-      route: window.location.pathname,
-    });
+    let status = await axios.post(
+      `${server}/api/isLoggedIn`,
+      {
+        route: window.location.pathname,
+      },
+      {
+        withCredentials: true,
+      }
+    );
     let res = status.data;
     if (res === "notLogIn") {
       toast.warn("You must be Logged in");
@@ -42,7 +48,9 @@ let checkUserRole = async (
   itemId
 ) => {
   try {
-    let userData = await axios.get(`${server}api/getUserRole`);
+    let userData = await axios.get(`${server}/api/getUserRole`, {
+      withCredentials: true,
+    });
     if (userData.data.role !== "retailer") {
       toast.error("Access denied");
       navigate("/");
@@ -72,8 +80,11 @@ let checkOwnership = async (
   itemId
 ) => {
   try {
-    let owner = await axios.post(
-      `${server}api/retailer/items/${itemId}/isOwner`
+    let owner = await axios.get(
+      `${server}/api/retailer/items/${itemId}/isOwner`,
+      {
+        withCredentials: true,
+      }
     );
     if (owner.data === null || owner.data === "itemNotFound") {
       toast.warn("No such product exists");

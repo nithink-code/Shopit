@@ -33,7 +33,9 @@ let getRetailersProducts = async (
   navigate
 ) => {
   try {
-    let products = await axios.get(`${server}api/retailer/products`);
+    let products = await axios.get(`${server}/api/retailer/products`, {
+      withCredentials: true,
+    });
     if (products.data === "notLogin") {
       toast.warn("You need to login");
       navigate("/login");

@@ -20,7 +20,9 @@ let handleQuantChange = (setOrderDetail, add, item) => {
 
 let orderProduct = async (navigate, orderDetail, id, setOpen) => {
   try {
-    let res = await axios.post(`${server}api/order/item/${id}`, orderDetail);
+    let res = await axios.post(`${server}/api/order/item/${id}`, orderDetail, {
+      withCredentials: true,
+    });
     if (res.data === "notLogin") {
       toast.warn("You need to Login");
       navigate("/login");
@@ -35,7 +37,7 @@ let orderProduct = async (navigate, orderDetail, id, setOpen) => {
       navigate("/");
     } else if (res.data === "ordered") {
       toast.success("Order Placed . Thank you for Ordering");
-      navigate("/");
+      navigate("/item/orders");
     }
   } catch (err) {
     console.log(err);
@@ -52,7 +54,9 @@ let orderDetails = async (
   setOrders
 ) => {
   try {
-    let res = await axios.get(`${server}api/order/item`);
+    let res = await axios.get(`${server}/api/order/item`, {
+      withCredentials: true,
+    });
     if (res.data === "notLogin") {
       toast.warn("You must login");
       navigate("/login");

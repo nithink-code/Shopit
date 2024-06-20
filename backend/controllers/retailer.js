@@ -65,6 +65,6 @@ module.exports.retailerProducts = async (req, res) => {
   }
 };
 
-module.exports.isOwner = (req, res) => {
+module.exports.Owner = (req, res) => {
   res.json("isOwner");
 };

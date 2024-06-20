@@ -22,7 +22,15 @@ let checkLogin = async (
   roleiscustomer
 ) => {
   try {
-    let status = await axios.post(`${server}api/isLoggedIn`);
+    let status = await axios.post(
+      `${server}/api/isLoggedIn`,
+      {
+        route: window.location.pathname,
+      },
+      {
+        withCredentials: true,
+      }
+    );
     let res = status.data;
     if (res === "LoggedIn") {
       getHomePageItems(
@@ -61,7 +69,9 @@ let getHomePageItems = async (
   roleiscustomer
 ) => {
   try {
-    let Itemdata = await axios.get(`${server}api/items`);
+    let Itemdata = await axios.get(`${server}/api/items`, {
+      withCredentials: true,
+    });
     let dataitems = Itemdata.data;
     setItems(dataitems);
     loading(
@@ -87,7 +97,9 @@ let item = async (
   setRoleIsCustomer
 ) => {
   try {
-    let data = await axios.get(`${server}api/getUserRole`);
+    let data = await axios.get(`${server}/api/getUserRole`, {
+      withCredentials: true,
+    });
     if (data.data.role === "retailer") {
       toast.warn("You need to log out of retailer role");
       navigate(`/retailer`);
@@ -99,6 +111,15 @@ let item = async (
         setShowComponent,
         setRoleIsCustomer,
         false
+      );
+    } else if (data.data.role === "customer") {
+      checkLogin(
+        axios,
+        setNavLogin,
+        setItems,
+        setShowComponent,
+        setRoleIsCustomer,
+        true
       );
     } else {
       checkLogin(

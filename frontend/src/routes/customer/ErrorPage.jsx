@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import NavBar2 from "../../components/NavBar2";
 import { toast } from "react-toastify";
+import { CircularProgress } from "@mui/material";
 
 export default function ErrorPage() {
   let navigate = useNavigate();
@@ -16,7 +17,9 @@ export default function ErrorPage() {
   useEffect(() => {
     async function checkLogin() {
       try {
-        let data = await axios.get("/api/getUserRole");
+        let data = await axios.get("/api/getUserRole", {
+          withCredentials: true,
+        });
         if (data.data.role === undefined) {
           setShowComponent(true);
         } else if (data.data.role === "customer") {
@@ -37,7 +40,7 @@ export default function ErrorPage() {
     checkLogin();
   }, []);
 
-  return (
+  return showComponent ? (
     <div className="errorPage">
       <NavBar2
         login={navLoginStatus}
@@ -58,5 +61,7 @@ export default function ErrorPage() {
         <b>{error?.message}</b>
       </p>
     </div>
+  ) : (
+    <CircularProgress />
   );
 }

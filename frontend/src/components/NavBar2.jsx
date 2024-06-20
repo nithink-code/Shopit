@@ -33,7 +33,9 @@ export default function NavBar2({
     displayElements(false);
 
     await axios
-      .get("/api/logOut")
+      .get("/api/logOut", {
+        withCredentials: true,
+      })
       .then((res) => {
         if (res.data === "loggedOut") {
           toast.success("Successfully Logged Out");

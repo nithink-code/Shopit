@@ -21,13 +21,8 @@ const wrapAsync = require("./utils/wrapAsync.js");
 const MongoStore = require("connect-mongo");
 const cors = require("cors");
 
-const corsOptions = {
-  origin: ["http://localhost:5173"],
-  methods: ["GET,PUT,PATCH,POST,DELETE"],
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
+// Handle preflight requests for all routes
+// app.options("*", cors(corsOptions));
 
 const port = 8080;
 
@@ -57,18 +52,30 @@ store.on("error", (err) => {
 
 const sessionOptions = {
   store,
-  secret: process.env.SECRET,
+  // secret: process.env.SECRET,
+  secret: "My secret",
   resave: false,
   saveUninitialized: true,
   cookie: {
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
     maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
+    secure: false,
   },
 };
 
 app.use(bodyParser.json());
 app.use(session(sessionOptions));
+
+const corsOptions = {
+  origin: ["https://shopit-five.vercel.app"],
+  methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
+app.options("*", cors(corsOptions));
 
 app.use(passport.initialize());
 app.use(passport.session());
