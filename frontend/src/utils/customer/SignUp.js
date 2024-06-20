@@ -2,7 +2,7 @@ import { server } from "../../server";
 
 let checkLogin = async (axios, navigate, toast, setShowComponent) => {
   try {
-    let status = await axios.get(`${server}/api/loginForm/isLoggedIn`, {
+    let status = await axios.get(`${server}api/loginForm/isLoggedIn`, {
       withCredentials: true,
     });
     if (status.data === "LoggedIn") {
@@ -41,7 +41,7 @@ let preventFormDefaultFunction = async (
     validation(newErrors);
     if (!err) {
       loadBtn(setLoading, true);
-      let authData = await axios.post(`${server}/api/${route}`, signUpData, {
+      let authData = await axios.post(`${server}api/${route}`, signUpData, {
         withCredentials: true,
       });
       if (authData.data.signUpStatus === "success signUp") {

@@ -23,7 +23,7 @@ let checkLogin = async (
 ) => {
   try {
     let status = await axios.post(
-      `${server}/api/isLoggedIn`,
+      `${server}api/isLoggedIn`,
       {
         route: window.location.pathname,
       },
@@ -69,7 +69,7 @@ let getHomePageItems = async (
   roleiscustomer
 ) => {
   try {
-    let Itemdata = await axios.get(`${server}/api/items`, {
+    let Itemdata = await axios.get(`${server}api/items`, {
       withCredentials: true,
     });
     let dataitems = Itemdata.data;
@@ -97,7 +97,7 @@ let item = async (
   setRoleIsCustomer
 ) => {
   try {
-    let data = await axios.get(`${server}/api/getUserRole`, {
+    let data = await axios.get(`${server}api/getUserRole`, {
       withCredentials: true,
     });
     if (data.data.role === "retailer") {

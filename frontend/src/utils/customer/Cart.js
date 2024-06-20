@@ -9,7 +9,7 @@ let getCartDetails = async (
   setShowComponent
 ) => {
   try {
-    let cardData = await axios.get(`${server}/api/items/cart/cartdetails`, {
+    let cardData = await axios.get(`${server}api/items/cart/cartdetails`, {
       withCredentials: true,
     });
     if (cardData.data === "notLogIn") {
@@ -43,7 +43,7 @@ let checkUserRole = async (
   setShowComponent
 ) => {
   try {
-    let userData = await axios.get(`${server}/api/getUserRole`, {
+    let userData = await axios.get(`${server}api/getUserRole`, {
       withCredentials: true,
     });
     if (userData.data.role === "customer") {
@@ -74,7 +74,7 @@ let CartInfo = async (
   setShowComponent
 ) => {
   try {
-    let cardData = await axios.get(`${server}/api/items/cart/cartdetails`, {
+    let cardData = await axios.get(`${server}api/items/cart/cartdetails`, {
       withCredentials: true,
     });
     if (cardData.data === "notLogIn") {
@@ -109,7 +109,7 @@ let deleteCartItem = async (
   setLoading
 ) => {
   try {
-    let data = await axios.delete(`${server}/api/items/cart/${id}`, {
+    let data = await axios.delete(`${server}api/items/cart/${id}`, {
       withCredentials: true,
     });
     if (data.data === "notLogIn") {

@@ -9,7 +9,7 @@ let checkLogin = async (
 ) => {
   try {
     let status = await axios.post(
-      `${server}/api/isLoggedIn`,
+      `${server}api/isLoggedIn`,
       {
         route: window.location.pathname,
       },
@@ -21,7 +21,7 @@ let checkLogin = async (
       toast.warn("You must be Logged in");
       navigate("/login");
     } else {
-      let userData = await axios.get(`${server}/api/getUserRole`, {
+      let userData = await axios.get(`${server}api/getUserRole`, {
         withCredentials: true,
       });
       if (userData.data.role !== "retailer") {

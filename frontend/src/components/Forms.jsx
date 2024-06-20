@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import LoadButtton from "./LoadButton.jsx";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme.js";
+import { server } from "../server.js";
 
 export default function Forms({
   alertMsg,
@@ -40,7 +41,7 @@ export default function Forms({
     if (!err) {
       setLoading(true);
       await axios[requestType](
-        `/api/${apiRoute}`,
+        `${server}api/${apiRoute}`,
         data,
         {
           headers: {

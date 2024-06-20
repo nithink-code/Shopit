@@ -9,7 +9,7 @@ let checkLogin = async (
   setShowComponent
 ) => {
   try {
-    let status = await axios.get(`${server}/api/retailer/roleAndLogin`, {
+    let status = await axios.get(`${server}api/retailer/roleAndLogin`, {
       withCredentials: true,
     });
     if (status.data === "notLogin") {
@@ -50,7 +50,7 @@ let checkOwnership = async (
 ) => {
   try {
     let owner = await axios.get(
-      `${server}/api/retailer/items/${itemInfo._id}/isOwner`,
+      `${server}api/retailer/items/${itemInfo._id}/isOwner`,
       {
         withCredentials: true,
       }
@@ -86,7 +86,7 @@ let deleteItem = async (axios, navigate, toast, id, setLoading) => {
 
 let deleteOperation = async (axios, navigate, toast, id) => {
   try {
-    let dataInfo = await axios.delete(`${server}/api/items/${id}`, {
+    let dataInfo = await axios.delete(`${server}api/items/${id}`, {
       withCredentials: true,
     });
     if (dataInfo.data === "notLogin") {

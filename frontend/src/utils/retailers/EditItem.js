@@ -10,7 +10,7 @@ let checkLogin = async (
 ) => {
   try {
     let status = await axios.post(
-      `${server}/api/isLoggedIn`,
+      `${server}api/isLoggedIn`,
       {
         route: window.location.pathname,
       },
@@ -48,7 +48,7 @@ let checkUserRole = async (
   itemId
 ) => {
   try {
-    let userData = await axios.get(`${server}/api/getUserRole`, {
+    let userData = await axios.get(`${server}api/getUserRole`, {
       withCredentials: true,
     });
     if (userData.data.role !== "retailer") {
@@ -81,7 +81,7 @@ let checkOwnership = async (
 ) => {
   try {
     let owner = await axios.get(
-      `${server}/api/retailer/items/${itemId}/isOwner`,
+      `${server}api/retailer/items/${itemId}/isOwner`,
       {
         withCredentials: true,
       }

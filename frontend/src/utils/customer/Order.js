@@ -20,7 +20,7 @@ let handleQuantChange = (setOrderDetail, add, item) => {
 
 let orderProduct = async (navigate, orderDetail, id, setOpen) => {
   try {
-    let res = await axios.post(`${server}/api/order/item/${id}`, orderDetail, {
+    let res = await axios.post(`${server}api/order/item/${id}`, orderDetail, {
       withCredentials: true,
     });
     if (res.data === "notLogin") {
@@ -54,7 +54,7 @@ let orderDetails = async (
   setOrders
 ) => {
   try {
-    let res = await axios.get(`${server}/api/order/item`, {
+    let res = await axios.get(`${server}api/order/item`, {
       withCredentials: true,
     });
     if (res.data === "notLogin") {
