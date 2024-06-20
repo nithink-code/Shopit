@@ -9,9 +9,12 @@ import ItemInfo from "../../components/ItemInfo";
 import NavBar2 from "../../components/NavBar2";
 import StatsDialog from "../../components/StatsDialog";
 import Footer from "../../components/Footer";
+import { server } from "../../server";
 
 export async function loader({ params }) {
-  let itemData = await axios.get(`/api/items/${params.productId}`);
+  let itemData = await axios.get(`${server}api/items/${params.productId}`, {
+    withCredentials: true,
+  });
   let itemInfo = itemData.data;
   return { itemInfo };
 }

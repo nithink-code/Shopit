@@ -59,7 +59,8 @@ const sessionOptions = {
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
     maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
-    // secure: false,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
   },
 };
 
@@ -67,7 +68,7 @@ app.use(bodyParser.json());
 app.use(session(sessionOptions));
 
 const corsOptions = {
-  origin: ["http://localhost:5173"],
+  origin: ["https://shopit-five.vercel.app"],
   methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
   credentials: true,
 };

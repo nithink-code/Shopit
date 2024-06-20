@@ -86,6 +86,7 @@ let checkOwnership = async (
         withCredentials: true,
       }
     );
+    console.log(owner);
     if (owner.data === null || owner.data === "itemNotFound") {
       toast.warn("No such product exists");
       navigate("/retailer");

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import NavBar2 from "../../components/NavBar2";
 import { toast } from "react-toastify";
 import { CircularProgress } from "@mui/material";
+import { server } from "../../server";
 
 export default function ErrorPage() {
   let navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function ErrorPage() {
   useEffect(() => {
     async function checkLogin() {
       try {
-        let data = await axios.get("/api/getUserRole", {
+        let data = await axios.get(`${server}api/getUserRole`, {
           withCredentials: true,
         });
         if (data.data.role === undefined) {

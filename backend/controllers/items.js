@@ -42,6 +42,7 @@ module.exports.createItem = async (req, res) => {
 
 module.exports.showItem = async (req, res) => {
   try {
+    console.log("showItem");
     let { id } = req.params;
 
     let item = await Item.findById(id)
@@ -49,6 +50,7 @@ module.exports.showItem = async (req, res) => {
       .catch((err) => {
         console.log("item not found error");
       });
+    console.log("showItem", item);
 
     if (!item) {
       console.log("item not found");

@@ -12,9 +12,12 @@ import ItemInfo from "../../components/ItemInfo";
 import NavBar2 from "../../components/NavBar2";
 import OrderDialog from "../../components/OrderDialog";
 import Footer from "../../components/Footer";
+import { server } from "../../server";
 
 export async function loader({ params }) {
-  let itemData = await axios.get(`/api/items/${params.id}`);
+  let itemData = await axios.get(`${server}api/items/${params.id}`, {
+    withCredentials: true,
+  });
   let itemInfo = itemData.data;
   return { itemInfo };
 }
@@ -24,6 +27,7 @@ export default function Item() {
   let [addedCart, setAddedCart] = useState(false);
   let [cartBtn, setCartBtn] = useState(false);
   const { itemInfo } = useLoaderData();
+  console.log(itemInfo);
   let navigate = useNavigate();
   let [navLogin, setNavLogin] = useState(false);
   let [roleIsCustomer, setRoleIsCustomer] = useState(true);

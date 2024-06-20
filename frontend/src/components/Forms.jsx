@@ -40,19 +40,30 @@ export default function Forms({
     data.append("stock", item.stock);
     if (!err) {
       setLoading(true);
-      await axios[requestType](
-        `${server}api/${apiRoute}`,
-        data,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+      console.log(requestType, apiRoute);
+      // await axios[requestType](
+      //   `${server}/api/${apiRoute}`,
+      //   data,
+      //   {
+      //     headers: {
+      //       "Content-Type": "multipart/form-data",
+      //     },
+      //   },
+      //   {
+      //     withCredentials: true,
+      //   }
+      // )
+      await axios({
+        method: requestType,
+        url: `${server}/api/${apiRoute}`,
+        data: data,
+        headers: {
+          "Content-Type": "multipart/form-data",
         },
-        {
-          withCredentials: true,
-        }
-      )
+        withCredentials: true,
+      })
         .then((apiData) => {
+          console.log(apiData);
           let data = apiData.data;
           if (data === "Retailer not found") {
             toast.error("Some error occured please try again");

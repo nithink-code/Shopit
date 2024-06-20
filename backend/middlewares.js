@@ -84,7 +84,9 @@ module.exports.validateLoginForm = (req, res, next) => {
 module.exports.isLoggedin = (req, res, next) => {
   try {
     let { route } = req.body;
+    console.log("isLoggedIn", req.body);
     if (!req.isAuthenticated()) {
+      console.log(req.isAuthenticated);
       req.session.returnTo = route;
       res.json("notLogIn");
     } else {
@@ -104,6 +106,7 @@ module.exports.redirect = (req, res, next) => {
 module.exports.isOwner = async (req, res, next) => {
   try {
     let { id } = req.params;
+    console.log(id);
     let item = await Item.findById(id)
       .populate("owner")
       .catch((err) => {
@@ -126,7 +129,7 @@ module.exports.isOwner = async (req, res, next) => {
 module.exports.checkCartItem = async (req, res, next) => {
   try {
     let { id } = req.params;
-
+    console.log(id);
     if (!req.user) {
       console.log("not login");
       res.json("You must login");
@@ -187,6 +190,7 @@ module.exports.deleteCheckCartItem = async (req, res, next) => {
 
 module.exports.findUserRole = (req, res, next) => {
   try {
+    console.log("findUserRole");
     if (req.isAuthenticated()) {
       return res.json(req.user);
     } else {

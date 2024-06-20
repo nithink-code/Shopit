@@ -15,6 +15,7 @@ let checkAddCartBtn = async (
         withCredentials: true,
       })
       .then((data) => {
+        console.log(data);
         if (data.data === "presentInCart") {
           displayElements(
             setAddedCart,
@@ -64,7 +65,8 @@ let checkLogin = async (
   setCartBtn,
   setNavLogin,
   setShowComponent,
-  itemId
+  itemId,
+  setItemInfo
 ) => {
   try {
     let status = await axios.post(
@@ -85,6 +87,7 @@ let checkLogin = async (
           withCredentials: true,
         })
         .then((userData) => {
+          console.log(userData);
           if (userData.data.role === "retailer") {
             toast.warn("You need to log out of retailer role");
             navigate(`/retailer`);

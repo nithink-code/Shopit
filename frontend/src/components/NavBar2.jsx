@@ -16,6 +16,7 @@ import theme from "../theme.js";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { server } from "../server.js";
 
 export default function NavBar2({
   login,
@@ -33,7 +34,7 @@ export default function NavBar2({
     displayElements(false);
 
     await axios
-      .get("/api/logOut", {
+      .get(`${server}/api/logOut`, {
         withCredentials: true,
       })
       .then((res) => {
