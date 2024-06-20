@@ -59,7 +59,7 @@ const sessionOptions = {
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
     maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
-    secure: false,
+    // secure: false,
   },
 };
 
@@ -67,7 +67,7 @@ app.use(bodyParser.json());
 app.use(session(sessionOptions));
 
 const corsOptions = {
-  origin: [" http://localhost:5173"],
+  origin: ["http://localhost:5173"],
   methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
   credentials: true,
 };
