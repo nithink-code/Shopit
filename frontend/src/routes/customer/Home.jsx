@@ -12,6 +12,7 @@ import "../../styles/Form.css";
 import "../../styles/Navbar.css";
 import NavBar2 from "../../components/NavBar2";
 import Footer from "../../components/Footer";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   let navigate = useNavigate();
@@ -53,11 +54,11 @@ export default function Home() {
             <div className="itemsList">
               {items.map((singleItem) =>
                 singleItem.stock !== 0 ? (
-                  <a href={`/item/${singleItem._id}`} key={singleItem._id}>
+                  <Link to={`/item/${singleItem._id}`} key={singleItem._id}>
                     <div className="items">
                       <ItemCrad item={singleItem} cardDetails={cardDetails} />
                     </div>
-                  </a>
+                  </Link>
                 ) : null
               )}
             </div>
