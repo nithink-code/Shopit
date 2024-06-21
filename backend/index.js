@@ -68,7 +68,7 @@ app.use(bodyParser.json());
 app.use(session(sessionOptions));
 
 const corsOptions = {
-  origin: ["https://shopit-five.vercel.app/"],
+  origin: "https://shopit-five.vercel.app",
   methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
   credentials: true,
 };
