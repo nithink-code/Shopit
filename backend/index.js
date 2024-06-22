@@ -64,7 +64,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-var whitelist = "https://shopit-five.vercel.app";
+var whitelist = ["https://shopit-five.vercel.app"];
 
 var corsOptions = {
   origin: function (origin, callback) {
