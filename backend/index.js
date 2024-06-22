@@ -20,6 +20,7 @@ const wrapAsync = require("./utils/wrapAsync.js");
 const MongoStore = require("connect-mongo");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const path = require("path");
 
 // Handle preflight requests for all routes
 // app.options("*", cors(corsOptions));
@@ -54,45 +55,13 @@ store.on("error", (err) => {
   console.log("Error occured in mongo session store", err);
 });
 
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-//   next();
-// });
-
-// var whitelist = ["https://shopit-five.vercel.app"];
-
-// var corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.indexOf(origin) === -1) {
-//       callback(new Error("Not allowed by CORS"));
-//     } else {
-//       callback(null, true);
-//     }
-//   },
-//   credentials: true,
-// };
-
-// app.use(cors(corsOptions));
-
-// app.use(bodyParser.json());
-// app.use(
-//   bodyParser.urlencoded({
-//     extended: false,
-//   })
-// );
-
 const sessionOptions = {
   store,
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
-    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    expires: Date.now() * 7 * 24 * 60 * 60 * 1000,
     maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
@@ -100,9 +69,9 @@ const sessionOptions = {
   },
 };
 
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(session(sessionOptions));
 
 const corsOptions = {
@@ -111,7 +80,7 @@ const corsOptions = {
   credentials: true,
 };
 
-app.options("*", cors(corsOptions));
+// app.options("*", cors(corsOptions));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -124,6 +93,7 @@ passport.serializeUser(function (entity, done) {
 });
 
 passport.deserializeUser(function (obj, done) {
+  console.log("Yes i am deserializing the user");
   switch (obj.type) {
     case "customer":
       User.findById(obj.id).then((user) => {
@@ -149,9 +119,9 @@ passport.deserializeUser(function (obj, done) {
   }
 });
 
-app.get("/", (req, res) => {
-  res.json("Success");
-});
+// app.get("/", (req, res) => {
+//   res.json("Success");
+// });
 
 app.get("/api/getUserRole", findUserRole, (req, res) => {
   res.json({ role: undefined });
@@ -166,6 +136,24 @@ app.use("/", usersRouter); //auth and authori route
 app.use("/api/items/cart", cartRouter); //cart route
 app.use("/api/retailer", retailerRouter); //retailer route
 app.use("/api/order/item", orderRouter); //order route
+
+// -------------------Deployment------------------//
+
+const __dirname1 = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname1, "frontend", "dist", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.json("Success");
+  });
+}
+
+// -------------------Deployment------------------//
 
 app.use((err, req, res, next) => {
   if (err) {
