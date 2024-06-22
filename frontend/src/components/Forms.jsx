@@ -41,21 +41,9 @@ export default function Forms({
     if (!err) {
       setLoading(true);
       console.log(requestType, apiRoute);
-      // await axios[requestType](
-      //   `${server}/api/${apiRoute}`,
-      //   data,
-      //   {
-      //     headers: {
-      //       "Content-Type": "multipart/form-data",
-      //     },
-      //   },
-      //   {
-      //     withCredentials: true,
-      //   }
-      // )
       await axios({
         method: requestType,
-        url: `${server}/api/${apiRoute}`,
+        url: `${server}api/${apiRoute}`,
         data: data,
         headers: {
           "Content-Type": "multipart/form-data",

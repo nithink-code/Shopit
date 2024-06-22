@@ -34,7 +34,7 @@ export default function NavBar2({
     displayElements(false);
 
     await axios
-      .get(`${server}/api/logOut`, {
+      .get(`${server}api/logOut`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -50,7 +50,7 @@ export default function NavBar2({
       })
       .catch((err) => {
         console.log(err);
-        navigate("/error");
+        toast.error("Some error ocurred");
       });
   };
 

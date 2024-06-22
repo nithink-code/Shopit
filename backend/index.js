@@ -20,6 +20,7 @@ const { findUserRole, loginFormIsLoggedIn } = require("./middlewares.js");
 const wrapAsync = require("./utils/wrapAsync.js");
 const MongoStore = require("connect-mongo");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 // Handle preflight requests for all routes
 // app.options("*", cors(corsOptions));
@@ -65,10 +66,12 @@ const sessionOptions = {
 };
 
 app.use(bodyParser.json());
+
+app.use(cookieParser());
 app.use(session(sessionOptions));
 
 const corsOptions = {
-  origin: "https://shopit-five.vercel.app",
+  origin: "http://localhost:5173",
   methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
   credentials: true,
 };
