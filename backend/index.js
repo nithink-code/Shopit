@@ -3,7 +3,6 @@ if (process.env.NODE_ENV != "production") {
 }
 
 const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
@@ -24,6 +23,23 @@ const cookieParser = require("cookie-parser");
 
 // Handle preflight requests for all routes
 // app.options("*", cors(corsOptions));
+
+const app = express();
+
+var whitelist = ["https://shopit-five.vercel.app"];
+
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) === -1) {
+      callback(new Error("Not allowed by CORS"));
+    } else {
+      callback(null, true);
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 const port = 8080;
 
@@ -51,6 +67,23 @@ store.on("error", (err) => {
   console.log("Error occured in mongo session store", err);
 });
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  next();
+});
+
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  })
+);
+
 const sessionOptions = {
   store,
   secret: process.env.SECRET,
@@ -65,20 +98,20 @@ const sessionOptions = {
   },
 };
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 app.use(cookieParser());
 app.use(session(sessionOptions));
 
-const corsOptions = {
-  origin: "https://shopit-five.vercel.app",
-  methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
-  credentials: true,
-};
+// const corsOptions = {
+//   origin: "https://shopit-five.vercel.app",
+//   methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
+//   credentials: true,
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
-app.options("*", cors(corsOptions));
+// app.options("*", cors(corsOptions));
 
 app.use(passport.initialize());
 app.use(passport.session());
