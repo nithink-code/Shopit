@@ -26,20 +26,7 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 
-var whitelist = ["https://shopit-five.vercel.app"];
-
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) === -1) {
-      callback(new Error("Not allowed by CORS"));
-    } else {
-      callback(null, true);
-    }
-  },
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 const port = 8080;
 
@@ -77,6 +64,21 @@ app.use(function (req, res, next) {
   next();
 });
 
+var whitelist = "https://shopit-five.vercel.app";
+
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) === -1) {
+      callback(new Error("Not allowed by CORS"));
+    } else {
+      callback(null, true);
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -104,12 +106,10 @@ app.use(cookieParser());
 app.use(session(sessionOptions));
 
 // const corsOptions = {
-//   origin: "https://shopit-five.vercel.app",
+//   origin: "http://localhost:5173",
 //   methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
 //   credentials: true,
 // };
-
-// app.use(cors(corsOptions));
 
 // app.options("*", cors(corsOptions));
 
