@@ -141,7 +141,7 @@ app.use("/api/order/item", orderRouter); //order route
 
 const __dirname1 = path.resolve();
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "local") {
   app.use(express.static(path.join(__dirname1, "/frontend/dist")));
 
   app.get("*", (req, res) => {
