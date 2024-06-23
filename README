@@ -1,2 +1,42 @@
-#Ecommerce
-Welcome to my E-commerce website 
+# Shopit (An E-commerce Website) 
+https://shopit-1-uq3z.onrender.com/
+
+Shopit is an E-commerce website built using the MERN stack (MongoDB, Express.js, React, Node.js), along with Material-UI and Tailwind CSS. 
+It follows the MVC (Model-View-Controller) architecture for a structured and organized development approach.
+
+## Technologies Used
+- **Frontend**: React, Material-UI, Tailwind CSS
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Architecture**: MVC (Model-View-Controller)
+
+## Functionalities
+
+### Customer
+- **View Products**: Browse through the list of products available for purchase.
+- **Product Details**: View detailed information about each product.
+- **Add to Cart**: Select products and add them to the shopping cart.
+- **View Cart**: See the list of products added to the cart and view its information by clicking it.
+- **Place Order**: Place an order, specifying the quantity of each product and obtaining the calculated price.
+- **View Orders**: View a list of previous orders.
+- **View Order Details**: Access detailed information about each order with real-time dates of order.
+
+### Retailer
+- **Host/Create Products**: Add new products to the website for customers to purchase.
+- **Edit Product Info**: Modify the information (e.g., product name, price, description, image, inventory) of existing products.
+- **Delete Product**: Remove products from the website's listing.
+- **View Sales Stats**: Monitor the number of purchases and profits generated from each product.
+
+### Authorization
+- Customers and retailers have separate logins and cannot access each other's pages.
+
+## Database Management
+- Products deleted by retailers are automatically removed from user cart, orders, and the home page in the database to maintain data consistency.
+- Reduce the number of stock of products based on the orders.
+- Products with 0 stocks will not be shown on the home page.
+
+## Website Hosting
+The website is hosted at https://shopit-1-uq3z.onrender.com/. Visit the link to explore the functionalities of Shopit.
+
+
+
