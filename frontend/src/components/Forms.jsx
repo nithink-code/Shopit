@@ -40,7 +40,6 @@ export default function Forms({
     data.append("stock", item.stock);
     if (!err) {
       setLoading(true);
-      console.log(requestType, apiRoute);
       await axios({
         method: requestType,
         url: `${server}api/${apiRoute}`,
@@ -51,7 +50,6 @@ export default function Forms({
         withCredentials: true,
       })
         .then((apiData) => {
-          console.log(apiData);
           let data = apiData.data;
           if (data === "Retailer not found") {
             toast.error("Some error occured please try again");
