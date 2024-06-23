@@ -1,1 +1,1 @@
-export var server = import.meta.env.VITE_API_URL;
+export var server = "https://shopit-1-uq3z.onrender.com/";
