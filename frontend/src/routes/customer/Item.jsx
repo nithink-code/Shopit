@@ -27,7 +27,6 @@ export default function Item() {
   let [addedCart, setAddedCart] = useState(false);
   let [cartBtn, setCartBtn] = useState(false);
   const { itemInfo } = useLoaderData();
-  console.log(itemInfo);
   let navigate = useNavigate();
   let [navLogin, setNavLogin] = useState(false);
   let [roleIsCustomer, setRoleIsCustomer] = useState(true);
