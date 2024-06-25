@@ -8,6 +8,17 @@
   height: 100%;
 }
 
+.imageContent img {
+  width: 207px;
+  height: 220px;
+}
+
+@media (max-width: 800px) and (min-width: 0px) {
+  .imageContent img {
+    transform: scale(0.6);
+  }
+}
+
 .textContent {
   width: 50%;
   display: flex;

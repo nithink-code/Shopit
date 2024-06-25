@@ -18,7 +18,7 @@ export default function QuantitySetter({ value, stock, handleQuantityChange }) {
         disabled
         type="number"
         value={value}
-        style={{ marginTop: "2rem", width: "20%" }}
+        style={{ marginTop: "2rem", width: "fit-content" }}
       />
       <AddSub
         add={true}
