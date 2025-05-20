@@ -1,4 +1,4 @@
-# Shopit - Modern E-commerce Platform
+#Shopit - Modern E-commerce Platform
 
 Shopit is a comprehensive e-commerce platform meticulously crafted using the MERN stack (MongoDB, Express.js, React, Node.js) and styled with Material-UI and Tailwind CSS. Employing the Model-View-Controller (MVC) architectural pattern, Shopit offers a structured and scalable foundation for online retail.
 
@@ -12,22 +12,22 @@ Core Functionalities:
 
 Customer Features:
 
-# Product Browsing: Intuitive interface for exploring the complete product catalog.
-# Detailed Product Views: Access comprehensive information for each item, aiding informed purchase decisions.
-# Shopping Cart Management: Seamlessly add desired products to a persistent shopping cart.
-# Cart Review: Easily view and manage items within the shopping cart, with detailed information accessible via a single click.
-# Order Placement: Streamlined checkout process enabling users to specify quantities and view automatically calculated prices.
-# Order History: Comprehensive view of past orders for easy tracking and reference.
-# Detailed Order Information: Access complete details for each order, including real-time timestamps.
+#Product Browsing: Intuitive interface for exploring the complete product catalog.
+#Detailed Product Views: Access comprehensive information for each item, aiding informed purchase decisions.
+#Shopping Cart Management: Seamlessly add desired products to a persistent shopping cart.
+#Cart Review: Easily view and manage items within the shopping cart, with detailed information accessible via a single click.
+#Order Placement: Streamlined checkout process enabling users to specify quantities and view automatically calculated prices.
+#Order History: Comprehensive view of past orders for easy tracking and reference.
+#Detailed Order Information: Access complete details for each order, including real-time timestamps.
 
-# Retailer Features:
+#Retailer Features:
 
-# Product Listing: Robust functionality for adding new products to the platform.
-# Product Information Management: Effortlessly edit and update key product details such as name, price, description, images, and inventory levels.
-# Product Removal: Simple and efficient process for deleting products from the website.
-# Sales Performance Monitoring: Track crucial sales statistics, including the number of purchases and revenue generated per product.
+#Product Listing: Robust functionality for adding new products to the platform.
+#Product Information Management: Effortlessly edit and update key product details such as name, price, description, images, and inventory levels.
+#Product Removal: Simple and efficient process for deleting products from the website.
+#Sales Performance Monitoring: Track crucial sales statistics, including the number of purchases and revenue generated per product.
 
-# Enhanced System Integrity:
+#Enhanced System Integrity:
 
 Real-time Data Synchronization: Products removed by retailers are automatically and immediately reflected across all user carts, order histories, and the main product listings, ensuring data consistency.
 Automated Inventory Management: Stock levels are automatically reduced upon order placement, maintaining accurate inventory.
